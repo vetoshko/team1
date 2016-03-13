@@ -15,19 +15,20 @@ var clearDB = require('mocha-mongoose')(url, {noClear: true});
 const PEOPLE_COUNT = 50;
 
 function fillUsers(userName, questName, callback) {
-    new User({
-        nickname: userName,
-        password: faker.internet.password(),
-        email: faker.internet.email(),
-        questname: questName
-    }).save((err, data) => {
-        if (err) {
-            callback(err);
-        } else {
-            callback();
-        };
-    });
-};
+    User.register(new User({
+            username: userName,
+            email: faker.internet.email(),
+            questname: questName
+        }),
+        faker.internet.password(),
+        (err, data) => {
+            if (err) {
+                callback(err);
+            } else {
+                callback();
+            }
+        });
+}
 
 
 function fillQuests(userName, questName, callback) {
@@ -54,9 +55,9 @@ function fillQuests(userName, questName, callback) {
             callback(err);
         } else {
             callback();
-        };
+        }
     });
-};
+}
 
 function fillCheckIn(userName, questName, callback) {
     new CheckIn({
@@ -68,9 +69,9 @@ function fillCheckIn(userName, questName, callback) {
             callback(err);
         } else {
             callback(null, true);
-        };
+        }
     });
-};
+}
 
 module.exports.fillDataBase = function (callback) {
     mongoose.connect(url);
@@ -88,7 +89,7 @@ module.exports.fillDataBase = function (callback) {
                     fillUsers.bind(null, userName, questName),
                     fillQuests.bind(null, userName, questName),
                     fillCheckIn.bind(null, userName, questName));
-            };
+            }
             async.series(functionsArray, (err) => {
                 callback(err);
                 mongoose.disconnect();
