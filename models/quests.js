@@ -71,6 +71,9 @@ var questsSchema = new Schema({
     }
 });
 
-var Quests = mongoose.model('Quests', questsSchema);
-
-module.exports = Quests;
+module.exports = {
+    Quest: mongoose.model('Quests', questsSchema),
+    Photo: mongoose.model('Photos', photoSchema),
+    Location: mongoose.model('Locations', locationSchema),
+    Comment: mongoose.model('Comments', commentsSchema)
+};
