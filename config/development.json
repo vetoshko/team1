@@ -1,0 +1,8 @@
+{
+  "projectName": "PHOTOQUEST",
+  "port": 3000,
+  "secretKey": "",
+  "db": {
+    "connectionString": "mongodb://127.0.0.1/test"
+  }
+}
