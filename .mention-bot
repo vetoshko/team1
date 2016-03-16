@@ -30,7 +30,7 @@
     {
       "name": "Dodo888",
       "files": ["*.*"]
-    },
+    }
   ], // users will be mentioned based on file glob if no other user was found
   "findPotentialReviewers": true, // mention-bot will try to find potential reviewers based on files history
   "fileBlacklist": ["*.md", "package.json"], // mention-bot will ignore any files that match these file globs
