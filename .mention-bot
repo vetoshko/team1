@@ -2,11 +2,40 @@
   "maxReviewers": 7,     // Maximum  number of people to ping in the PR message
   "numFilesToCheck": 10, // Number of files to check against
   "alwaysNotifyForPaths": [], // users will always be mentioned based on file glob
-  "fallbackNotifyForPaths": [], // users will be mentioned based on file glob if no other user was found
+  "fallbackNotifyForPaths": [
+    {
+      "name": "danmir",
+      "files": ["*.*"]
+    },
+    {
+      "name": "Lucifer-is-my-pet",
+      "files": ["*.*"]
+    },
+    {
+      "name": "mironov-alexey",
+      "files": ["*.*"]
+    },
+    {
+      "name": "NikShel",
+      "files": ["*.*"]
+    },
+    {
+      "name": "vetoshko",
+      "files": ["*.*"]
+    },
+    {
+      "name": "Victoria-Vladimirova",
+      "files": ["*.*"]
+    },
+    {
+      "name": "Dodo888",
+      "files": ["*.*"]
+    },
+  ], // users will be mentioned based on file glob if no other user was found
   "findPotentialReviewers": true, // mention-bot will try to find potential reviewers based on files history
-  "fileBlacklist": ["*.md"], // mention-bot will ignore any files that match these file globs
+  "fileBlacklist": ["*.md", "package.json"], // mention-bot will ignore any files that match these file globs
   "userBlacklist": [], // users in this list will never be mentioned by mention-bot
   "userBlacklistForPR": [], // PR made by users in this list will be ignored
-  "requiredOrgs": [], // mention-bot will only mention user who are a member of one of these organizations
+  "requiredOrgs": ["urfu-2015"], // mention-bot will only mention user who are a member of one of these organizations
   "actions": ["opened"] // List of PR actions that mention-bot will listen to, default is "opened"
 }
