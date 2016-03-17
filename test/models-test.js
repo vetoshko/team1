@@ -1,4 +1,4 @@
-var dbURI = 'mongodb://team1-urfu2015:team1-urfu2015@ds011429.mlab.com:11429/team1-urfu2015';
+var dbURI = 'mongodb://127.0.0.1';
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var User = require('../models/users.js');
