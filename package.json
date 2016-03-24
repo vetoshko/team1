@@ -23,7 +23,9 @@
     "webpack": "^1.12.14"
   },
   "devDependencies": {
+    "async": "^1.5.2",
     "chai": "^3.5.0",
+    "faker": "^3.0.1",
     "husky": "^0.11.3",
     "jscs": "^2.11.0",
     "mocha": "^2.4.5",
