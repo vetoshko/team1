@@ -1,24 +1,19 @@
-var mongoose = require('mongoose');
+var mongoose = require('../scripts/mongooseConnect.js');
 var validators = require('mongoose-validators');
 var Schema = mongoose.Schema;
+var passportLocalMongoose = require('passport-local-mongoose');
 
 var userSchema = new Schema({
-    nickname: {
-        type: String,
-        required: true
-    },
     questname: String,
     email: {
         type: String,
         required: true,
         validate: validators.isEmail()
     },
-    password: {
-        type: String,
-        required: true
-    },
     phone: String
 });
+
+userSchema.plugin(passportLocalMongoose);
 
 var User = mongoose.model('User', userSchema);
 

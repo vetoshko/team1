@@ -1,61 +1,56 @@
-var dbURI = 'mongodb://127.0.0.1';
 var expect = require('chai').expect;
-var mongoose = require('mongoose');
+var mongoose = require('../scripts/mongooseConnect.js');
 var User = require('../models/users.js');
-var clearDB = require('mocha-mongoose')(dbURI, {noClear: true});
+var clearDB = require('mocha-mongoose')(require('config').get('db.connectionString'),
+    {noClear: true});
 var assert = require('assert');
 
 describe('Example spec for a model', function () {
-    before(function (done) {
-        if (mongoose.connection.db) {
-            return done();
-        }
-        mongoose.connect(dbURI, done);
-    });
 
     before(function (done) {
         clearDB(done);
     });
 
+    after(function (done) {
+        clearDB(done);
+    });
+
     it('email is not valid', function (done) {
-        new User(
-            {
-                nickname: 'String',
-                questname: 'String',
-                email: 'not e-mail',
-                password: 'String',
-                phone: 'String'
-            }).save(function (err, a) {
+        User.register(new User({
+                username: 'String',
+                email: 'not e-mail'}),
+            'String', function (err, a) {
             expect(err).to.exist;
             done();
         });
     });
 
     it('required field', function (done) {
-        new User(
-            {
+        User.register(new User({
+                username: 'String',
                 questname: 'String',
-                email: 'a@a.a',
-                password: 'String',
                 phone: 'String'
-            }).save(function (err, a) {
-            expect(err).to.exist;
-            done();
-        });
+            }),
+            'String', function (err, a) {
+                expect(err).to.exist;
+                done();
+            });
     });
 
     it('extra field', function (done) {
-        new User(
-            {
-                nickname: 'String',
+        User.register(new User({
+                username: 'String',
                 questname: 'String',
-                email: 'a@a.a',
-                password: 'String',
                 phone: 'String',
+                email: 'a@a.a',
                 new: 'new'
-            }).save(function (err, a) {
-            expect(a['new']).to.equal(undefined);
-            done();
-        });
+            }),
+            'String', function (err, a) {
+                if (err) {
+                    done(err);
+                }
+                expect(a['new']).to.equal(undefined);
+                done();
+            });
     });
 });
