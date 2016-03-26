@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>{{ title }}</title>
-        <link rel="stylesheet" href="/stylesheets/style.css">
+        <title>{% block title %} {% endblock %}</title>
+        {% block head %} {% endblock %}
+        <link href="/public/stylesheets/layout.css" rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Exo+2:400,700,400italic' rel='stylesheet'
+              type='text/css'>
     </head>
     <body>
+        <header class="header">
+            <h1 class="site-title">Photoquest</h1>
+            {% if user %}
+                <span class="logged-in">Вы вошли как {{ user }}</span>
+            {% else %}
+                {% include "./signin-form.html" %}
+            {% endif %}
+        </header>
         {% block content %}
         {% endblock %}
+        <footer class="footer">
+        </footer>
     </body>
 </html>
