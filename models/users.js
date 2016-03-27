@@ -10,7 +10,12 @@ var userSchema = new Schema({
         required: true,
         validate: validators.isEmail()
     },
-    phone: String
+    phone: String,
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        expires: 60 * 60 * 24
+    }
 });
 
 userSchema.plugin(passportLocalMongoose);

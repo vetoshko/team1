@@ -4,5 +4,13 @@
   "secretKey": "Whats the key?",
   "db": {
     "connectionString": "mongodb://127.0.0.1/test"
+  },
+  "smtp": {
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "auth": {
+      "user": "urfu2016team1@gmail.com",
+      "pass": "urfu2016team"
+    }
   }
 }
