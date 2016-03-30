@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var swig = require('swig');
 var passport = require('passport');
 var expressSession = require('express-session');
+var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -35,6 +36,7 @@ app.use(expressSession({
     saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 app.use('/', routes);
 app.use('/users', users);

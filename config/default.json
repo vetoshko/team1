@@ -4,5 +4,13 @@
   "secretKey": "Whats the key?",
   "db": {
     "connectionString": "mongodb://team1-urfu2015:team1-urfu2015@ds011429.mlab.com:11429/team1-urfu2015"
+  },
+  "smtp": {
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "auth": {
+      "user": "urfu2016team1@gmail.com",
+      "pass": "urfu2016team"
+    }
   }
 }
