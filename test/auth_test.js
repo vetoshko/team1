@@ -48,7 +48,7 @@ describe('Auth tests', () => {
         User.remove(done);
     });
 
-    it('sign up new user', (done) => {
+    it('should sign up new user', (done) => {
         request(app)
             .post('/signup')
             .send({
@@ -72,7 +72,19 @@ describe('Auth tests', () => {
             });
     });
 
-    it('reject sign up of user with incorrect email', (done) => {
+    it('should not sign up existing user', (done) => {
+        request(app)
+            .post('/signup')
+            .send({
+                email: 'typical@email.com',
+                username: 'typicalUser',
+                password: 'typicalPassword'
+            })
+            .expect(302)
+            .expect('Location', '/signup', done);
+    });
+
+    it('should not sign up user with incorrect email', (done) => {
         request(app)
             .post('/signup')
             .send({
@@ -84,7 +96,7 @@ describe('Auth tests', () => {
             .expect('Location', '/signup', done);
     });
 
-    it('sign in normal user', (done) => {
+    it('should sign in normal user', (done) => {
         request(app)
             .post('/signin')
             .send({
@@ -100,7 +112,7 @@ describe('Auth tests', () => {
             });
     });
 
-    it('reject sign in of nonexistent user', (done) => {
+    it('should not sign in nonexistent user', (done) => {
         request(app)
             .post('/signin')
             .send({
@@ -110,7 +122,7 @@ describe('Auth tests', () => {
             .expect(401, done);
     });
 
-    it('reject sign in of user with incorrect password', (done) => {
+    it('should not sign in user with incorrect password', (done) => {
         request(app)
             .post('/signin')
             .send({
