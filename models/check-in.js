@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('../scripts/mongooseConnect.js');
 var Schema = mongoose.Schema;
 
 var checkInSchema = new Schema({

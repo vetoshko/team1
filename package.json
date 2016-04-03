@@ -9,7 +9,8 @@
     "lint": "jscs .",
     "test": "mocha --recursive test/",
     "prepush": "npm-run-all lint test",
-    "precommit": "npm-run-all lint test"
+    "precommit": "npm-run-all lint test",
+    "filldb": "node ./scripts/fillDb.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -20,6 +21,7 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-session": "^1.13.0",
+    "mongoosastic": "^4.0.2",
     "mongoose": "^4.4.7",
     "morgan": "~1.6.1",
     "nodemailer": "^2.3.0",
@@ -40,12 +42,14 @@
     "mocha": "^2.4.5",
     "mocha-mongoose": "^1.1.1",
     "mongodb": "^2.1.7",
+    "mongoosastic": "^4.0.2",
     "mongoose-validators": "^0.1.0",
     "npm-run-all": "^1.5.3",
     "prepush": "^3.1.8",
     "rimraf": "^2.5.2",
     "should": "^8.2.2",
-    "supertest": "^1.2.0"
+    "supertest": "^1.2.0",
+    "underscore": "^1.8.3"
   },
   "engines": {
     "node": "4.4.0"
