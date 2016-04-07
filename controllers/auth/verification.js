@@ -13,7 +13,7 @@ module.exports = function (req, res) {
         if (err || !user) {
             return res.redirect('/');
         }
-        user.createdAt = undefined;
+        user.createdAt = null;
         user.save(function (err) {
             if (err) {
                 return res.redirect('/');

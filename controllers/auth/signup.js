@@ -17,7 +17,7 @@ module.exports.post = function (req, res) {
         }),
         req.body.password, function (err, user) {
             if (err) {
-                return res.redirect('signup');
+                return res.redirect('/signup');
             }
             var token = cryptojs.AES.encrypt(req.body.email, secretKey);
             var message = {
