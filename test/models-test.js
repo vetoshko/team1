@@ -1,3 +1,5 @@
+var config = require('config');
+var dbURI = config.get('db.connectionString');
 var expect = require('chai').expect;
 var mongoose = require('../scripts/mongooseConnect.js');
 var User = require('../models/users.js');
