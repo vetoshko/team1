@@ -1,0 +1,25 @@
+version: '2'
+services:
+  elasticsearch:
+    restart: on-failure:10
+    image: elasticsearch:latest
+    command: elasticsearch -Des.network.host=0.0.0.0
+    volumes:
+      - data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+#  logstash:
+#    build: logstash/
+#    ports:
+#      - "5000:5000"
+#    links:
+#      - elasticsearch
+#  kibana:
+#    build: kibana/
+#    ports:
+#      - "5601:5601"
+#    links:
+#      - elasticsearch
+volumes:
+  data: {}

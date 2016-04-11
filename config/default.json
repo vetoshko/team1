@@ -11,6 +11,11 @@
     "auth": {
       "user": "urfu2016team1@gmail.com",
       "pass": "urfu2016team"
-    }
+    },
+    "connectionString": "mongodb://127.0.0.1"
+  },
+  "es": {
+    "host": "104.236.106.134",
+    "port": "9200"
   }
 }

@@ -1,5 +1,8 @@
-var mongoose = require('mongoose');
+var mongoose = require('../scripts/mongooseConnect.js');
 var validators = require('mongoose-validators');
+var mongoosastic = require('mongoosastic');
+var esHost = require('config').get('es.host');
+var esPort = require('config').get('es.port');
 var Schema = mongoose.Schema;
 
 var commentsSchema = new Schema({
@@ -50,29 +53,47 @@ var photoSchema = new Schema({
 var questsSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        es_indexed: true
     },
     author: {
         type: String,
-        required: true
+        required: true,
+        es_indexed: true
     },
     city: {
         type: String,
-        required: true
+        required: true,
+        es_indexed: true
     },
     description: {
         type: String,
-        required: true
+        required: true,
+        es_indexed: true
     },
-    like: Array,
+    like: {
+        type: Array,
+        es_indexed: false
+    },
     photo: {
         type: [photoSchema],
-        required: true
+        required: true,
+        es_indexed: false
     }
 });
 
+questsSchema.plugin(mongoosastic, {
+    host: esHost,
+    port: esPort
+    // protocol: "https",
+    // auth: "username:password",
+    // curlDebug: true
+});
+
+var Quest = mongoose.model('Quests', questsSchema);
+
 module.exports = {
-    Quest: mongoose.model('Quests', questsSchema),
+    Quest: Quest,
     Photo: mongoose.model('Photos', photoSchema),
     Location: mongoose.model('Locations', locationSchema),
     Comment: mongoose.model('Comments', commentsSchema)

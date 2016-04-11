@@ -1,16 +1,15 @@
 'use strict';
-var mongoose = require('mongoose');
-var config = require('config');
-var url = config.get('db.connectionString');
+var mongoose = require('./mongooseConnect.js');
 var User = require('../models/users.js');
 var Quest = require('../models/quests.js').Quest;
 var Photo = require('../models/quests.js').Photo;
 var Location = require('../models/quests.js').Location;
 var Comment = require('../models/quests.js').Comment;
 var CheckIn = require('../models/check-in.js');
+var clearDb = require('./clearDB.js');
+var clearES = require('./clearES.js');
 var faker = require('faker');
 var async = require('async');
-var clearDB = require('mocha-mongoose')(url, {noClear: true});
 
 const PEOPLE_COUNT = 50;
 
@@ -44,13 +43,14 @@ function fillQuests(userName, questName, callback) {
                 lat: faker.address.latitude(),
                 lon: faker.address.longitude()
             }),
-            comments: [ new Comment({
+            comments: [new Comment({
                 author: userName,
                 date: Date.now,
                 text: faker.hacker.phrase()
             })]
         })
     }).save((err, data) => {
+        console.log(data);
         if (err) {
             callback(err);
         } else {
@@ -74,30 +74,35 @@ function fillCheckIn(userName, questName, callback) {
 }
 
 module.exports.fillDataBase = function (callback) {
-    mongoose.connect(url);
-    console.log('connect');
-    module.exports.clearDB((err) => {
-        if (err) {
-            console.log(err);
-            callback(err);
-        } else {
-            var functionsArray = [];
-            for (var i = 0; i < PEOPLE_COUNT; i++) {
-                var questName = faker.company.companyName();
-                var userName = faker.internet.userName();
-                var functionsArray = functionsArray.concat(
-                    fillUsers.bind(null, userName, questName),
-                    fillQuests.bind(null, userName, questName),
-                    fillCheckIn.bind(null, userName, questName));
-            }
-            async.series(functionsArray, (err) => {
-                callback(err);
-                mongoose.disconnect();
-            });
-        }
+    var functionsArray = [];
+    for (var i = 0; i < PEOPLE_COUNT; i++) {
+        var questName = faker.company.companyName();
+        var userName = faker.internet.userName();
+        functionsArray = functionsArray.concat(
+            fillUsers.bind(null, userName, questName),
+            fillQuests.bind(null, userName, questName),
+            fillCheckIn.bind(null, userName, questName));
+    }
+    async.series(functionsArray, (err) => {
+        mongoose.disconnect(function () {
+            console.log('All connections closed.');
+        });
+        callback(err);
     });
 };
 
-module.exports.clearDB = function (callback) {
-    clearDB(callback);
+module.exports.reFillDataBase = function (callback) {
+    clearDb(() => {
+        clearES(() => {
+            module.exports.fillDataBase(callback);
+        });
+    });
 };
+
+module.exports.reFillDataBase((err) => {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('Database filled');
+    }
+});
