@@ -5,9 +5,10 @@ var esHost = require('config').get('es.host');
 var esPort = require('config').get('es.port');
 var Schema = mongoose.Schema;
 
-var commentsSchema = new Schema({
+var commentSchema = new Schema({
     author: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     date: {
@@ -35,29 +36,33 @@ var locationSchema = new Schema({
 });
 
 var photoSchema = new Schema({
-    likes: Array,
-    quest: {
-        type: String,
-        required: true
-    },
-    filename: {
-        type: String,
-        required: true
-    },
+    likes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    checkIn: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }],
     location: locationSchema,
     hint: String,
-    description: String,
-    comments: [commentsSchema]
+    description: {
+        type: String,
+        required: true
+    },
+    comments: [commentSchema],
+    link: String
 });
 
-var questsSchema = new Schema({
+var questSchema = new Schema({
     name: {
         type: String,
         required: true,
         es_indexed: true
     },
     author: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true,
         es_indexed: true
     },
@@ -71,18 +76,20 @@ var questsSchema = new Schema({
         required: true,
         es_indexed: true
     },
-    like: {
-        type: Array,
+    likes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         es_indexed: false
-    },
+    }],
     photo: {
         type: [photoSchema],
         required: true,
         es_indexed: false
-    }
+    },
+    comments: [commentSchema]
 });
 
-questsSchema.plugin(mongoosastic, {
+questSchema.plugin(mongoosastic, {
     host: esHost,
     port: esPort
     // protocol: "https",
@@ -90,11 +97,9 @@ questsSchema.plugin(mongoosastic, {
     // curlDebug: true
 });
 
-var Quest = mongoose.model('Quests', questsSchema);
-
 module.exports = {
-    Quest: Quest,
+    Quest: mongoose.model('Quests', questSchema),
     Photo: mongoose.model('Photos', photoSchema),
     Location: mongoose.model('Locations', locationSchema),
-    Comment: mongoose.model('Comments', commentsSchema)
+    Comment: mongoose.model('Comments', commentSchema)
 };

@@ -22,15 +22,14 @@ describe('Example spec for a model', function () {
                 username: 'String',
                 email: 'not e-mail'}),
             'String', function (err, a) {
-            expect(err).to.exist;
-            done();
-        });
+                expect(err).to.exist;
+                done();
+            });
     });
 
     it('required field', function (done) {
         User.register(new User({
                 username: 'String',
-                questname: 'String',
                 phone: 'String'
             }),
             'String', function (err, a) {
@@ -42,7 +41,6 @@ describe('Example spec for a model', function () {
     it('extra field', function (done) {
         User.register(new User({
                 username: 'String',
-                questname: 'String',
                 phone: 'String',
                 email: 'a@a.a',
                 new: 'new'
