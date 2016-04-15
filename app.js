@@ -19,7 +19,7 @@ var app = express();
 
 // view engine setup
 app.engine('html', swig.renderFile);
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'bundles'));
 app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
+        res.render('error/error', {
             message: err.message,
             error: err
         });
@@ -68,10 +68,15 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('error/error', {
         message: err.message,
         error: {}
     });
 });
+
+app.locals = {
+    isDev: process.env.NODE_ENV !== 'production',
+    bundleBase: require('config').get('bundleBase')
+};
 
 module.exports = app;

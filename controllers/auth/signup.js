@@ -7,7 +7,7 @@ var mailSender = require('../../scripts/sendMail.js');
 var secretKey = require('config').get('secretKey');
 
 module.exports.get = function (req, res) {
-    res.render('signup', { });
+    res.render('signup/signup', { });
 };
 
 module.exports.post = function (req, res) {
