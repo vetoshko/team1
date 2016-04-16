@@ -3,8 +3,7 @@ var dbURI = config.get('db.connectionString');
 var expect = require('chai').expect;
 var mongoose = require('../scripts/mongooseConnect.js');
 var User = require('../models/users.js');
-var clearDB = require('mocha-mongoose')(require('config').get('db.connectionString'),
-    {noClear: true});
+var clearDB = require('../scripts/clearDB.js');
 var assert = require('assert');
 
 describe('Example spec for a model', function () {
