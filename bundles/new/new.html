@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление квеста</title>
+    {% if not isDev %}
+        <link rel="stylesheet" href="{{ bundleBase }}new.bundle.css">
+    {% endif %}
+        <script type="text/javascript" src="{{ bundleBase }}new.bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Exo+2:400,700,400italic" rel="stylesheet"
+          type="text/css">
+</head>
+<body>
+
+{% include "../../blocks/header/header.html" %}
+
+{% include "../../blocks/new-quest/new-quest.html" %}
+
+{% include "../../blocks/footer/footer.html" %}
+
+</body>
+</html>
