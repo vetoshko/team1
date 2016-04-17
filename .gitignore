@@ -5,3 +5,4 @@ test_markup
 public/
 blocks/**/*.css
 bundles/**/*.css
+uploads/

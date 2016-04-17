@@ -14,6 +14,11 @@
     },
     "connectionString": "mongodb://127.0.0.1"
   },
+  "cloudinary": {
+    "cloud_name": "photoquest-team1",
+    "api_key": "643177998266659",
+    "api_secret": "681K4agstajtKxV3EJAcI5mUuYg"
+  },
   "es": {
     "host": "104.236.106.134",
     "port": "9200"

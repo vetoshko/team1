@@ -48,7 +48,7 @@ describe('Auth tests', () => {
         User.remove(done);
     });
 
-    it('should sign up new user', (done) => {
+    it('should sign up new-quest user', (done) => {
         request(app)
             .post('/signup')
             .send({

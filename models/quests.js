@@ -46,12 +46,12 @@ var photoSchema = new Schema({
     }],
     location: locationSchema,
     hint: String,
-    description: {
+    description: String,
+    comments: [commentSchema],
+    link: {
         type: String,
         required: true
-    },
-    comments: [commentSchema],
-    link: String
+    }
 });
 
 var questSchema = new Schema({
