@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "watch": "webpack --progress --colors --watch",
-    "run-dev": "webpack-dev-server --config=webpack.dev.config.js --hot --inline --content-base=public/ & NODE_ENV=development node ./bin/www",
+    "run-dev": "webpack-dev-server --config=webpack.dev.config.js --hot --inline --content-base=public/",
     "run-prod": "webpack --config=webpack.config.js && NODE_ENV=production node ./bin/www",
     "clean": "rimraf node_modules/",
     "fill": "node ./scripts/fillDB.js",
