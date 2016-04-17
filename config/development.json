@@ -13,5 +13,10 @@
       "pass": "urfu2016team"
     }
   },
+  "cloudinary": {
+    "cloud_name": "photoquest-team1",
+    "api_key": "643177998266659",
+    "api_secret": "681K4agstajtKxV3EJAcI5mUuYg"
+  },
   "bundleBase": "http://localhost:8080/"
 }

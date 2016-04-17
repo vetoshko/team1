@@ -11,8 +11,8 @@
     "fill": "node ./scripts/fillDB.js",
     "lint": "jscs .",
     "test": "mocha --recursive test/",
-    "prepush": "npm run lint && npm run test",
-    "precommit": "npm run lint && npm run test",
+    "prepush": "npm-run-all lint test",
+    "precommit": "npm-run-all lint test",
     "filldb": "node ./scripts/fillDb.js"
   },
   "dependencies": {

@@ -8,11 +8,7 @@ var User = require('../models/users.js');
 var mongoose = require('../scripts/mongooseConnect.js');
 
 module.exports.post = (req, res) => {
-    cloudinary.config({
-        cloud_name: 'photoquest-team1',
-        api_key: '643177998266659',
-        api_secret: '681K4agstajtKxV3EJAcI5mUuYg'
-    });
+    cloudinary.config(require('config').get('cloudinary'));
 
     var uploadFunction = (photo, callback) => {
         cloudinary.uploader.upload(photo.path, function (result) {
@@ -26,37 +22,6 @@ module.exports.post = (req, res) => {
         });
         callback(null, photo);
     };
-
-    async.map(req.files, uploadFunction, (err, links) => {
-        async.map(links, newPhoto, (err, photos) => {
-            var user = User.register(new User({
-                _id: 1,
-                username: 'admin',
-                email: 'a@a.a',
-                phone: '8800'
-            }), 'qwertyui', err => {
-                new Quest({
-                    name: req.body.name,
-                    author: user,
-                    city: 'Ekaterinburg',
-                    description: req.body.description,
-                    photo: photos
-                }).save(err => {
-                    if (err) {
-                        console.log(err);
-                        mongoose.disconnect(function () {
-                            console.log('All connections closed.');
-                        });
-                    } else {
-                        mongoose.disconnect(function () {
-                            console.log('All connections closed.');
-                        });
-                        res.redirect(`/quest/${req.body.name}`);
-                    }
-                });
-            });
-        });
-    });
 };
 
 
