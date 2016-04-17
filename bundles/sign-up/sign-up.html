@@ -13,9 +13,16 @@
 </head>
 <body>
 
-{% include "../../blocks/header/header.html" %}
+<header class="header">
+    {% include "../../blocks/header/header.html" %}
+</header>
 
-{% include "../../blocks/signup-form/signup-form.html" %}
+<main class="main">
+    <div class="sign-up">
+        <h2 class="sign-up__title">Регистрация</h2>
+        {% include "../../blocks/sign-up-form/sign-up-form.html" %}
+    </div>
+</main>
 
 {% include "../../blocks/footer/footer.html" %}
 

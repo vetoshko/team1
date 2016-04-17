@@ -12,7 +12,7 @@ module.exports = {
     entry: {
         main: './main/main.js',
         error: './error/error.js',
-        signup: './signup/signup.js'
+        signup: './sign-up/sign-up.js'
     },
 
     output: {
