@@ -12,5 +12,6 @@
       "user": "urfu2016team1@gmail.com",
       "pass": "urfu2016team"
     }
-  }
+  },
+  "bundleBase": "http://localhost:8080/"
 }

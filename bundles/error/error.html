@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    {% if not isDev %}
+    <link rel="stylesheet" href="{{ bundleBase }}error.bundle.css">
+    {% endif %}
+    <script type="text/javascript" src="{{ bundleBase }}error.bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Exo+2:400,700,400italic" rel="stylesheet"
+          type="text/css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+{% include "../../blocks/header/header.html" %}
+
+<h1>{{ message }}</h1>
+<h2>{{ error.status }}</h2>
+<pre>{{ error.stack }}</pre>
+
+{% include "../../blocks/footer/footer.html" %}
+
+</body>
+</html>

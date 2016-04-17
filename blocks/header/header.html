@@ -1,0 +1,8 @@
+<header class="header">
+    <h1 class="site-title">Photoquest</h1>
+    {% if user %}
+    <span class="logged-in">Вы вошли как {{ user }}</span>
+    {% else %}
+    {% include "../signin-form/signin-form.html" %}
+    {% endif %}
+</header>
