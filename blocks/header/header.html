@@ -3,6 +3,10 @@
     {% if user %}
     <span class="logged-in">Вы вошли как {{ user }}</span>
     {% else %}
-    {% include "../signin-form/signin-form.html" %}
+    <div class="signin-search">
+        <div class="singin-search__hide">Авторизация</div>
+        {% include "../signin-form/signin-form.html" %}
     {% endif %}
+    {% include "../search/search.html" %}
+    </div>
 </header>
