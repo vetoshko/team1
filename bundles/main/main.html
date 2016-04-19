@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     {% if not isDev %}
     <link rel="stylesheet" href="{{ bundleBase }}main.bundle.css">
     {% endif %}
-    <script type="text/javascript" src="{{ bundleBase }}main.bundle.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Exo+2:400,700,400italic" rel="stylesheet"
-          type="text/css">
-    {% block head %}{% endblock %}
 </head>
 <body>
-    {% include "../../blocks/header/header.html" %}
-
-    <main class="main">
-        <h1>{{ title }}</h1>
-        <p>Welcome to #{{ title }}</p>
-    </main>
+{% include "../../blocks/header/header.html" %}
+{% include "../../blocks/banner/banner.html" %}
+<main class="main">
+</main>
+{% include "../../blocks/footer/footer.html" %}
+<script type="text/javascript" src="{{ bundleBase }}main.bundle.js"></script>
 
     {% include "../../blocks/footer/footer.html" %}
     <script src="../../blocks/sign-in-form/sign-in-form.js"></script>

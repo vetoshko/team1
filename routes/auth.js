@@ -10,6 +10,7 @@ var reset = require('../controllers/auth/password-reset.js');
 router.get('/signup', signup.get);
 router.post('/signup', signup.post);
 
+router.get('/signin', signin.get);
 router.post('/signin', passport.authenticate('local'), signin.post);
 
 router.get('/signout', signout);

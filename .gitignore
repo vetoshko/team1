@@ -6,3 +6,5 @@ public/
 blocks/**/*.css
 bundles/**/*.css
 uploads/
+
+components/**/*.css

@@ -6,15 +6,15 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     {% if not isDev %}
-    <link rel="stylesheet" href="{{ bundleBase }}signup.bundle.css">
+    <link rel="stylesheet" href="{{ bundleBase }}quests.bundle.css">
     {% endif %}
 </head>
 <body>
 {% include "../../blocks/header/header.html" %}
 <main class="main">
-    {% include "../../blocks/signup-form/signup-form.html" %}
+    <div id="list" class="quest-list-container"></div>
 </main>
 {% include "../../blocks/footer/footer.html" %}
-<script type="text/javascript" src="{{ bundleBase }}signup.bundle.js"></script>
+<script type="text/javascript" src="{{ bundleBase }}quests.bundle.js"></script>
 </body>
 </html>

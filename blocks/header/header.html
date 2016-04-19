@@ -1,2 +1,11 @@
-<h1 class="header__title">Photoquest</h1>
-
+<header class="header">
+    <div class="header__title">photoquest</div>
+    <div class="header__buttons">
+        <!--{% if user %}-->
+        <!--<div class="logged-in">Вы вошли как <a>{{ user }}</a></div>-->
+        <!--{% else %}-->
+        <a href="/signin" class="header__login">войти</a>
+        <!--{% endif %}-->
+        <a href="/signup" class="header__signup">зарегистрироваться</a>
+    </div>
+</header>

@@ -76,6 +76,11 @@ var questSchema = new Schema({
         required: true,
         es_indexed: true
     },
+    date: {
+        type: Date,
+        default: Date.now,
+        required: true
+    },
     likes: [{
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -98,8 +103,8 @@ questSchema.plugin(mongoosastic, {
 });
 
 module.exports = {
-    Quest: mongoose.model('Quests', questSchema),
-    Photo: mongoose.model('Photos', photoSchema),
-    Location: mongoose.model('Locations', locationSchema),
-    Comment: mongoose.model('Comments', commentSchema)
+    Quest: mongoose.model('Quest', questSchema),
+    Photo: mongoose.model('Photo', photoSchema),
+    Location: mongoose.model('Location', locationSchema),
+    Comment: mongoose.model('Comment', commentSchema)
 };

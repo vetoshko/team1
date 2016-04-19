@@ -1,0 +1,39 @@
+.banner
+  display flex
+  flex-flow row wrap
+  background-color #5bcbe3
+  font 400 1em 'Graphik Web', Helvetica, Arial, sans-serif
+  color #fff
+  padding-top 40px
+
+  &__image
+    //background url('../../blocks/banner/51049-O6N3ZF.png') no-repeat
+    background-position right
+    background-size contain
+    height 100%
+    width 50%
+  &__description
+    width 50%
+    padding-bottom 60px
+  &__text
+    font-size 48px
+    font-weight 500
+    padding 20px 0
+    max-width 450px
+    min-width 250px
+  &__button
+    color inherit
+    display inline-block
+    text-decoration none
+    border 2px solid #fff
+    padding 10px 25px
+    text-transform: uppercase
+    letter-spacing: 1px
+    cursor pointer
+    user-select none
+    -webkit-user-select none
+  &__button:hover
+    color #fff
+    background-color rgba(255, 255, 255, .12)
+  &__button:active
+    color #fff

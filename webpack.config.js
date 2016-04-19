@@ -12,7 +12,9 @@ module.exports = {
     entry: {
         main: './main/main.js',
         error: './error/error.js',
-        signup: './sign-up/sign-up.js'
+        signup: './signup/signup.js',
+        signin: './signin/signin.js',
+        quests: './quests/quests.js'
     },
 
     output: {
@@ -43,7 +45,10 @@ module.exports = {
 
     plugins: [
         new ExtractTextPlugin('[name].bundle.css'),
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.ProvidePlugin({
+            fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        })
     ],
 
     postcss: [

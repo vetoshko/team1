@@ -15,6 +15,7 @@ var users = require('./routes/users');
 var authRoutes = require('./routes/auth');
 var questCreationRoutes = require('./routes/quest-creation');
 var commentRoutes = require('./routes/comments');
+var questList = require('./routes/questList');
 
 var secretKey = require('config').get('secretKey');
 
@@ -50,6 +51,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/', authRoutes);
 app.use('/', commentRoutes);
+app.use('/quests', questList);
 app.use('/quests/new-quest', questCreationRoutes);
 
 require('./controllers/auth/auth-config');
