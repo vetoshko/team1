@@ -46,7 +46,7 @@ app.use('/users', users);
 app.use('/', authRoutes);
 app.use('/', commentRoutes);
 
-app.use('/quests/new', newQuest);
+app.use('/quests/new-quest', newQuest);
 
 require('./controllers/auth/auth-config');
 // catch 404 and forward to error handler

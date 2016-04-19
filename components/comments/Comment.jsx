@@ -15,15 +15,15 @@ export default class Comment extends React.Component {
     render() {
         return (
             <li>
-                <div className={styles.comment__meta}>
-                    <div className={styles.comment__author}>
+                <div className="comment__meta">
+                    <div className="comment__author">
                         {this.state.id}. {this.state.username}
                     </div>
-                    <div className={styles.comment__date}>
+                    <div className="comment__date">
                         {this.state.date}
                     </div>
                 </div>
-                <div className={styles.comment__text}>
+                <div className="comment__text">
                     {this.props.text}
                 </div>
             </li>);

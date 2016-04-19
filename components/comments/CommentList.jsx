@@ -14,10 +14,12 @@ export default class CommentList extends React.Component {
         var commentNodes = this.state.comments.map(
             (comment) => <Comment {...comment} key={comment._id} />);
         return (
+            <div className="comment-list__header">
+                Комментарии:
+            </div>
             <ul>
-                <div className={styles.comment-list__header}>Комментарии:</div>
                 {commentNodes}
             </ul>
-        )
+        );
     }
 }

@@ -24,10 +24,6 @@ module.exports.post = (req, res) => {
     };
 };
 
-
-
-
-
 module.exports.get = (req, res) => {
-    res.render('new/new', {title: 'Express'});
+    res.render('new-quest/new-quest', {title: 'Express'});
 };
