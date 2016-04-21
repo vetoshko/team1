@@ -9,9 +9,11 @@ var passport = require('passport');
 var expressSession = require('express-session');
 var flash = require('connect-flash');
 
+//routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var authRoutes = require('./routes/auth');
+var commentRoutes = require('./routes/comments');
 
 var secretKey = require('config').get('secretKey');
 
@@ -41,6 +43,7 @@ app.use(flash());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/', authRoutes);
+app.use('/', commentRoutes);
 
 require('./controllers/auth/auth-config');
 // catch 404 and forward to error handler
