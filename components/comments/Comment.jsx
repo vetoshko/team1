@@ -15,11 +15,11 @@ export default class Comment extends React.Component {
     render() {
         return (
             <li>
-                <div className="comment__meta">
-                    <div className="comment__author">
+                <div className="comment-info">
+                    <div className="comment-info__author">
                         {this.state.id}. {this.state.username}
                     </div>
-                    <div className="comment__date">
+                    <div className="comment-info__date">
                         {this.state.date}
                     </div>
                 </div>
