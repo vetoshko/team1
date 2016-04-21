@@ -34,9 +34,6 @@ module.exports.post = (req, res) => {
                     description: req.body.description,
                     photo: photos
                 }).save(err => {
-                    mongoose.disconnect(function () {
-                        console.log('All connections closed.');
-                    });
                     if (!err) {
                         res.redirect(`/quest/${req.body.name}`);
                     } else {
