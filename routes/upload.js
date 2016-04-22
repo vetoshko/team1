@@ -3,9 +3,10 @@ var router = express.Router();
 var uploadPhoto = require('../controllers/upload-photo.js');
 var multer = require('multer');
 var upload = multer({ dest: './uploads/'});
+var loginRequired = require('../middlewares/auth.js').loginRequired;
 
-router.post('/', upload.array('photo', 15), uploadPhoto.post);
+router.post('/', loginRequired, upload.array('photo', 15), uploadPhoto.post);
 
-router.get('/', uploadPhoto.get);
+router.get('/', loginRequired, uploadPhoto.get);
 
 module.exports = router;
