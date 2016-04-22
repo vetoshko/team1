@@ -13,7 +13,7 @@ var flash = require('connect-flash');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var authRoutes = require('./routes/auth');
-var newQuest = require('./routes/upload');
+var questCreationRoutes = require('./routes/quest-creation');
 var commentRoutes = require('./routes/comments');
 
 var secretKey = require('config').get('secretKey');
@@ -50,8 +50,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/', authRoutes);
 app.use('/', commentRoutes);
-
-app.use('/quests/new-quest', newQuest);
+app.use('/quests/new-quest', questCreationRoutes);
 
 require('./controllers/auth/auth-config');
 // catch 404 and forward to error handler
