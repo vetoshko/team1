@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './Comment.styl';
 
 export default class Comment extends React.Component {
     constructor(params) {
