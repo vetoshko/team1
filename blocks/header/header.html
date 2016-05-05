@@ -1,7 +1,7 @@
 <header class="header">
     <h1 class="site-title">Photoquest</h1>
     {% if user %}
-    <span class="logged-in">Вы вошли как {{ user }}</span>
+    <span class="logged-in">Вы вошли как {{ user.username }}</span>
     {% else %}
     <div class="signin-search">
         <div class="singin-search__hide">Авторизация</div>

@@ -13,6 +13,7 @@ var flash = require('connect-flash');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var authRoutes = require('./routes/auth');
+var questCreationRoutes = require('./routes/quest-creation');
 var commentRoutes = require('./routes/comments');
 
 var secretKey = require('config').get('secretKey');
@@ -40,10 +41,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+app.use(function (req, res, next) {
+    res.locals.user = req.user;
+    next();
+});
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/', authRoutes);
 app.use('/', commentRoutes);
+app.use('/quests/new-quest', questCreationRoutes);
 
 require('./controllers/auth/auth-config');
 // catch 404 and forward to error handler
