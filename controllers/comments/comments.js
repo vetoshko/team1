@@ -1,12 +1,17 @@
+'use strict';
+
 var questsModel = require('../../models/quests.js');
-var Quest = questsModel.Quest;
 var Comment = questsModel.Comment;
 
-module.exports.list = function (req, res) {
-    var questId = req.params.questId;
-    Quest.findById(questId)
-        .populate('comments.author', 'username')
-        .exec((err, quest) => {
+
+class CommentsController {
+    constructor(commentsProvider) {
+        this.commentsProvider = commentsProvider;
+    }
+
+    list(req, res) {
+        var questId = req.params.questId;
+        this.commentsProvider.getQuestById(questId, (err, quest) => {
             if (err) {
                 return res.status(500).send();
             }
@@ -15,19 +20,16 @@ module.exports.list = function (req, res) {
             }
             res.json({comments: quest.comments});
         });
-};
+    }
 
-module.exports.create = function (req, res) {
-    var questId = req.params.questId;
-    var text = req.body.text;
-    var comment = new Comment({
-        author: req.user,
-        text
-    });
-    Quest.findByIdAndUpdate(
-        questId,
-        {$push: {comments: comment}},
-        (err, updatedDoc) => {
+    create(req, res) {
+        var questId = req.params.questId;
+        var text = req.body.text;
+        var comment = new Comment({
+            author: req.user,
+            text
+        });
+        this.commentsProvider.create(questId, comment, (err, updatedDoc) => {
             if (err) {
                 return res.status(500).send();
             }
@@ -41,24 +43,13 @@ module.exports.create = function (req, res) {
                 res.status(201);
                 res.json({comment});
             });
-        }
-    );
-};
+        });
+    }
 
-module.exports.delete = function (req, res) {
-    var questId = req.params.questId;
-    var commentId = req.body.commentId;
-
-    Quest.findByIdAndUpdate(
-        questId, {
-            $pull: {
-                comments: {
-                    _id: commentId,
-                    author: req.user._id
-                }
-            }
-        },
-        (err, updatedDoc) => {
+    delete(req, res) {
+        var questId = req.params.questId;
+        var commentId = req.body.commentId;
+        this.commentsProvider.delete(questId, commentId, (err, updatedDoc) => {
             if (err) {
                 return res.status(500).send();
             }
@@ -66,31 +57,20 @@ module.exports.delete = function (req, res) {
                 return res.status(400).send();
             }
             res.status(200).send();
-        }
-    );
-};
+        });
+    }
 
-module.exports.edit = function (req, res) {
-    var questId = req.params.questId;
-    var commentId = req.body.commentId;
-    var text = req.body.text;
-
-    Quest.update({
-            _id: questId,
-            comments: {
-                $elemMatch: {
-                    _id: commentId,
-                    author: req.user._id
-                }
-            }
-        },
-        {$set: {'comments.$.text': text}},
-        (err, updated) => {
+    edit(req, res) {
+        var questId = req.params.questId;
+        var commentId = req.body.commentId;
+        var text = req.body.text;
+        this.commentsProvider.edit(questId, commentId, text, (err, updated) => {
             if (err) {
                 return res.status(500).send();
             }
             res.status(updated.n ? 200 : 400).send();
-        }
-    );
-};
+        });
+    }
+}
 
+exports.CommentsController = CommentsController;
