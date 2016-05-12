@@ -65,6 +65,17 @@ function fillQuests(usersId, callback) {
 }
 
 module.exports.fillDataBase = function (callback) {
+    User.register(new User({
+        username: 'admin',
+        email: 'a@a.a',
+        createdAt: null
+    }), 'admin', err => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('User added');
+        }
+    });
 
     var usersId = [];
     for (var i = 0; i < peopleCount; i++) {
