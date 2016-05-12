@@ -38,7 +38,8 @@ function checkVerification(done) {
         });
 }
 
-describe('Auth tests', () => {
+describe('Auth tests', function () {
+    this.timeout(3000);
     before((done) => {
         mockNodeMailer();
         User.remove(done);

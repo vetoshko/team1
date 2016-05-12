@@ -12,14 +12,25 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <main class="main">
-    {% include "../../blocks/header/header.html" %}
+<main class="main">
+    <header class="header">
+        {% include "../../blocks/header/header.html" %}
+        {% if user %}
+        <span class="logged-in">Вы вошли как {{ user }}</span>
+        {% else %}
+        <div class="sign-in">
+            <div class="sign-in__hide-button">Авторизация</div>
+            {% include "../../blocks/sign-in-form/sign-in-form.html" %}
+            {% include "../../blocks/sign-in/sign-in.html" %}
+        {% endif %}
+            {% include "../../blocks/search-form/search-form.html" %}
+        </div>
+    </header>
 
     <h1>{{ title }}</h1>
     <p>Welcome to #{{ title }}</p>
 
     {% include "../../blocks/footer/footer.html" %}
     </main>
-<script src="../../blocks/signin-form/signin-form.js"></script>
 </body>
 </html>
