@@ -4,33 +4,22 @@
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
     {% if not isDev %}
-        <link rel="stylesheet" href="{{ bundleBase }}main.bundle.css">
+    <link rel="stylesheet" href="{{ bundleBase }}main.bundle.css">
     {% endif %}
-        <script type="text/javascript" src="{{ bundleBase }}main.bundle.js"></script>
+    <script type="text/javascript" src="{{ bundleBase }}main.bundle.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Exo+2:400,700,400italic" rel="stylesheet"
           type="text/css">
     {% block head %}{% endblock %}
 </head>
 <body>
-<main class="main">
-    <header class="header">
-        {% include "../../blocks/header/header.html" %}
-        {% if user %}
-        <span class="logged-in">Вы вошли как {{ user }}</span>
-        {% else %}
-        <div class="sign-in">
-            <div class="sign-in__hide-button">Авторизация</div>
-            {% include "../../blocks/sign-in-form/sign-in-form.html" %}
-            {% include "../../blocks/sign-in/sign-in.html" %}
-        {% endif %}
-            {% include "../../blocks/search-form/search-form.html" %}
-        </div>
-    </header>
+    {% include "../../blocks/header/header.html" %}
 
-    <h1>{{ title }}</h1>
-    <p>Welcome to #{{ title }}</p>
+    <main class="main">
+        <h1>{{ title }}</h1>
+        <p>Welcome to #{{ title }}</p>
+    </main>
 
     {% include "../../blocks/footer/footer.html" %}
-    </main>
+    <script src="../../blocks/sign-in-form/sign-in-form.js"></script>
 </body>
 </html>
