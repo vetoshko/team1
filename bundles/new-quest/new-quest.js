@@ -1,0 +1,1 @@
+require('./new-quest.styl');

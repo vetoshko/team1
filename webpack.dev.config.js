@@ -12,7 +12,8 @@ module.exports = {
         error: './error/error.js',
         signup: './signup/signup.js',
         signin: './signin/signin.js',
-        quests: './quests/quests.js'
+        quests: './quests/quests.js',
+        'new-quest': './new-quest/new-quest.js'
     },
 
     output: {
