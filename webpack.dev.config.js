@@ -2,6 +2,7 @@
 
 var autoprefixer = require('autoprefixer');
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
     context: path.join(__dirname, 'bundles'),
@@ -9,8 +10,9 @@ module.exports = {
     entry: {
         main: './main/main.js',
         error: './error/error.js',
-        signup: './signup/sign-up.js',
-        new: './new-quest/new-quest.js'
+        signup: './signup/signup.js',
+        signin: './signin/signin.js',
+        quests: './quests/quests.js'
     },
 
     output: {
@@ -39,6 +41,12 @@ module.exports = {
             }
         ]
     },
+
+    plugins: [
+        new webpack.ProvidePlugin({
+            fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        })
+    ],
 
     postcss: [
         autoprefixer

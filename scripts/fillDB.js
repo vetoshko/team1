@@ -44,6 +44,7 @@ function fillQuests(usersId, callback) {
             date: Date.now,
             text: faker.hacker.phrase()
         })],
+        date: faker.date.past(),
         photo: new Photo({
             checkIn: users,
             link: faker.image.imageUrl(),

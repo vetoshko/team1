@@ -1,0 +1,103 @@
+.quest-list
+  &__item
+    list-style-type: none
+    margin-bottom: 20px
+    padding: 10px 20px 20px
+    box-shadow: 0 10px 10px -10px #555
+    background-color: #fff
+    border-radius: 3px
+    font: 400 1em 'Graphik Web', Helvetica, Arial, sans-serif
+    color: #414a51
+    display: flex
+    flex-flow: row wrap;
+
+  &__image-container
+    margin: 0 20px 10px 0;
+
+  &__image,
+  &__date
+    width: 250px
+    flex-shrink: 0
+
+  &__field-name
+    display: block
+    line-height: 1.2
+    color: #4e5e6a
+    font-size: 1.5em
+    width: 100%
+    margin-left: 0
+    margin-right: 0
+
+  &__main,
+  &__more
+    display: flex
+    justify-content: space-between
+
+  &__more
+    margin-top: 10px
+    width: 100%
+
+  &__likes
+    display: flex
+    align-items: center
+    cursor: pointer
+    padding: 4px 6px
+
+  &__likes:hover
+    background-color: #eee
+    border-radius: 3px
+
+  &__like-icon,
+  &__date-icon
+    display: inline-block
+
+  &__like-count
+    display: inline-block
+    font: 400 .9em 'Graphik Web', Helvetica, Arial, sans-serif
+
+  &__description
+    flex-grow: 1
+    justify-content: flex-end
+
+  &__date
+    font: 400 13px 'Graphik Web', Helvetica, Arial, sans-serif
+    color: #bbb
+
+  &__author
+    padding: 0 0 1.5em
+    line-height: 1.5
+    color: #9DA8B0;
+    font-size: 0.925em
+    font-weight: bold
+    width 100%
+
+@media all and (max-width: 800px)
+  .quest-list
+    &__main
+      flex-flow: column
+
+    &__image
+      width: 100%
+
+    &__image-container
+      margin-right: 0
+
+a
+  text-decoration: none
+  outline: none
+  color: #4e5e6a
+  cursor: pointer
+
+a:hover
+  color: #2D3E4A
+
+.fa-heart-o
+  font-size: 1.3em
+  margin-left: 7px
+
+.fa-calendar-o
+  margin-right 5px;
+
+.fa-user
+  color: #4e5e6a
+  margin-right 5px
