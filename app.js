@@ -8,6 +8,8 @@ var swig = require('swig');
 var passport = require('passport');
 var expressSession = require('express-session');
 var flash = require('connect-flash');
+var config = require('config');
+var MongoStore = require('connect-mongo')(expressSession);
 
 //routes
 var routes = require('./routes/index');
@@ -36,6 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(expressSession({
     secret: secretKey,
+    store: new MongoStore({
+        url: config.get('db.connectionString')
+    }),
     resave: false,
     saveUninitialized: false}));
 app.use(passport.initialize());
