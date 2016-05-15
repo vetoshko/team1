@@ -26,6 +26,9 @@ module.exports.post = function (req, res) {
                 verifyURL: 'http://' + req.get('host') + '/verify/' + token
             };
             mailSender.sendVerificationMail(message, function (err) {
+                if (err) {
+                    console.error(err);
+                }
                 res.redirect('/');
             });
         });
