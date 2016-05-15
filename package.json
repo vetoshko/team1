@@ -11,7 +11,6 @@
     "lint": "jscs .",
     "test": "mocha --recursive test/",
     "prepush": "npm-run-all lint test",
-    "precommit": "npm-run-all lint test",
     "filldb": "node ./scripts/fillDb.js",
     "deploy": "webpack --config=webpack.config.js && surge -p ./public -d urfu2016team1.surge.sh"
   },
