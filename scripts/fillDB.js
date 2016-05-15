@@ -33,7 +33,6 @@ function fillQuests(usersId, callback) {
     for (var i = 0; i < size; i++) {
         users.push(usersId[Math.floor(Math.random() * peopleCount)]);
     }
-
     new Quest({
         name: faker.company.companyName(),
         author: usersId[Math.floor(Math.random() * peopleCount)],
@@ -59,7 +58,8 @@ function fillQuests(usersId, callback) {
                 date: Date.now,
                 text: faker.hacker.phrase()
             })]
-        })
+        }),
+        likes: usersId.slice(0, Math.floor(Math.random() * peopleCount / 5))
     }).save(err => {
         err ? callback(err) : callback();
     });
