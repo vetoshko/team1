@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    {% if not isDev %}
+    <link rel="stylesheet" href="{{ bundleBase }}quest.bundle.css">
+    {% endif %}
+</head>
+<body>
+{% include "../../blocks/header/header.html" %}
+<main class="main">
+    <div id="quest-info" class="quest-container"></div>
+</main>
+{% include "../../blocks/footer/footer.html" %}
+<script type="text/javascript" src="{{ bundleBase }}quest.bundle.js"></script>
+</body>
+</html>
