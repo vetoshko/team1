@@ -23,5 +23,5 @@
     "host": "104.236.106.134",
     "port": "9200"
   },
-  "bundleBase": "/"
+  "bundleBase": "https://urfu2016team1.surge.sh/"
 }
