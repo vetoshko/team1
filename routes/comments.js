@@ -2,11 +2,14 @@ var express = require('express');
 var router = express.Router();
 var loginRequired = require('../middlewares/auth.js').loginRequired;
 
-var commentsControllers = require('../controllers/comments/comments.js');
+var CommentsController = require('../controllers/comments/comments').CommentsController;
+var DbCommentsProvider = require('../controllers/comments/dbCommentsProvider').DbCommentsProvider;
 
-router.get('/quests/:questId/comments', commentsControllers.list);
-router.post('/quests/:questId/comments', loginRequired, commentsControllers.create);
-router.put('/quests/:questId/comments', loginRequired, commentsControllers.edit);
-router.delete('/quests/:questId/comments', loginRequired, commentsControllers.delete);
+var commentsController = new CommentsController(new DbCommentsProvider());
+
+router.get('/quests/:questId/comments', commentsController.list);
+router.post('/quests/:questId/comments', loginRequired, commentsController.create);
+router.put('/quests/:questId/comments', loginRequired, commentsController.edit);
+router.delete('/quests/:questId/comments', loginRequired, commentsController.delete);
 
 module.exports = router;
