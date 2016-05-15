@@ -8,7 +8,6 @@ var mongoose = require('../scripts/mongooseConnect.js');
 var uploadPhoto = require('../scripts/uploadPhoto.js');
 
 module.exports.post = (req, res) => {
-
     async.map(req.files, uploadPhoto.upload, (err, links) => {
         async.map(links, uploadPhoto.createPhoto, (err, photos) => {
             new Quest({
