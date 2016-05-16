@@ -1,4 +1,5 @@
 @import '../../blocks/header/header.styl';
+@import '../../blocks/search-form/search-form.styl';
 @import '../../components/questList/questList.styl';
 @import '../../components/questList/questListItemComponent.styl';
 
@@ -6,3 +7,16 @@ html,
 body
   padding 0
   margin 0
+  height 100%
+  width 100%
+  display flex
+  flex-flow: row wrap;
+
+.header
+  flex: 1 100%;
+
+.main
+  display flex
+  flex: 1 100%;
+  justify-content center
+  flex-flow: row wrap;

@@ -13,6 +13,7 @@ module.exports = {
         signup: './signup/signup.js',
         signin: './signin/signin.js',
         quests: './quests/quests.js',
+        search: './search/search.js',
         'new-quest': './new-quest/new-quest.js'
     },
 

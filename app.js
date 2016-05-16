@@ -14,6 +14,8 @@ var MongoStore = require('connect-mongo')(expressSession);
 //routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var quests = require('./routes/quests');
+var searchRoute = require('./routes/search');
 var authRoutes = require('./routes/auth');
 var questCreationRoutes = require('./routes/quest-creation');
 var commentRoutes = require('./routes/comments');
@@ -56,8 +58,10 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/', authRoutes);
 app.use('/', commentRoutes);
-app.use('/quests', questList);
+app.use('/quests', quests);
+app.use('/quests/questsList', questList);
 app.use('/quests/new-quest', questCreationRoutes);
+app.use('/quests/search', searchRoute);
 
 require('./controllers/auth/auth-config');
 // catch 404 and forward to error handler

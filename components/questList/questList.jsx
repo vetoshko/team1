@@ -6,7 +6,7 @@ import 'moment/locale/ru';
 import QuestListItemComponent from "./questListItemComponent.jsx";
 
 var getAll = function (callback) {
-    fetch('/quests', {
+    fetch('/quests/questsList', {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -36,8 +36,6 @@ export default class QuestList extends React.Component {
     }
 
     render() {
-
-        console.log(this.state.quests);
 
         var questNodes = this.state.quests.map(quest =>
             <QuestListItemComponent key={quest._id}
