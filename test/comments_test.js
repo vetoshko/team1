@@ -37,7 +37,7 @@ class FakeCommentsProvider {
         callback(null, this.quests[questId]);
     }
 
-    delete(questId, commentId, callback) {
+    delete(questId, commentId, user, callback) {
         if (questId >= this.quests.length) {
             return callback(null, null);
         }
@@ -45,7 +45,7 @@ class FakeCommentsProvider {
         callback(null, this.quests[questId]);
     }
 
-    edit(questId, commentId, text, callback) {
+    edit(questId, commentId, text, user, callback) {
         if (questId >= this.quests.length || commentId >= this.quests[questId].comments.length) {
             return callback(null, {n: null});
         }

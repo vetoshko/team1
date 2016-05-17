@@ -20,6 +20,7 @@ var authRoutes = require('./routes/auth');
 var questCreationRoutes = require('./routes/quest-creation');
 var commentRoutes = require('./routes/comments');
 var questList = require('./routes/questList');
+var likeRoutes = require('./routes/likes');
 
 var secretKey = require('config').get('secretKey');
 
@@ -60,8 +61,10 @@ app.use('/', authRoutes);
 app.use('/', commentRoutes);
 app.use('/quests', quests);
 app.use('/quests/questsList', questList);
+app.use('/', likeRoutes);
 app.use('/quests/new-quest', questCreationRoutes);
 app.use('/quests/search', searchRoute);
+app.use('/', likeRoutes);
 
 require('./controllers/auth/auth-config');
 // catch 404 and forward to error handler

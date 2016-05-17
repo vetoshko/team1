@@ -25,6 +25,7 @@ class CommentsController {
     create(req, res) {
         var questId = req.params.questId;
         var text = req.body.text;
+        console.log(req.user);
         var comment = new Comment({
             author: req.user,
             text
@@ -49,7 +50,7 @@ class CommentsController {
     delete(req, res) {
         var questId = req.params.questId;
         var commentId = req.body.commentId;
-        this.commentsProvider.delete(questId, commentId, (err, updatedDoc) => {
+        this.commentsProvider.delete(questId, commentId, req.user, (err, updatedDoc) => {
             if (err) {
                 return res.status(500).send();
             }
@@ -64,7 +65,7 @@ class CommentsController {
         var questId = req.params.questId;
         var commentId = req.body.commentId;
         var text = req.body.text;
-        this.commentsProvider.edit(questId, commentId, text, (err, updated) => {
+        this.commentsProvider.edit(questId, commentId, text, req.user, (err, updated) => {
             if (err) {
                 return res.status(500).send();
             }

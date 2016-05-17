@@ -17,26 +17,26 @@ class DbCommentsProvider {
         );
     }
 
-    delete(questId, commentId, callback) {
+    delete(questId, commentId, user, callback) {
         Quest.findByIdAndUpdate(
             questId, {
                 $pull: {
                     comments: {
                         _id: commentId,
-                        author: req.user._id
+                        author: user._id
                     }
                 }
             },
             callback);
     }
 
-    edit(questId, commentId, text, callback) {
+    edit(questId, commentId, text, user, callback) {
         Quest.update({
                 _id: questId,
                 comments: {
                     $elemMatch: {
                         _id: commentId,
-                        author: req.user._id
+                        author: user._id
                     }
                 }
             },

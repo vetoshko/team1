@@ -7,9 +7,23 @@ var DbCommentsProvider = require('../controllers/comments/dbCommentsProvider').D
 
 var commentsController = new CommentsController(new DbCommentsProvider());
 
-router.get('/quests/:questId/comments', commentsController.list);
-router.post('/quests/:questId/comments', loginRequired, commentsController.create);
-router.put('/quests/:questId/comments', loginRequired, commentsController.edit);
-router.delete('/quests/:questId/comments', loginRequired, commentsController.delete);
+router.get(
+    '/quests/:questId/comments',
+    (req, res) => commentsController.list(req, res));
+
+router.post(
+    '/quests/:questId/comments',
+    loginRequired,
+    (req, res) => commentsController.create(req, res));
+
+router.put(
+    '/quests/:questId/comments',
+    loginRequired,
+    (req, res) => commentsController.edit(req, res));
+
+router.delete(
+    '/quests/:questId/comments',
+    loginRequired,
+    (req, res) => commentsController.delete(req, res));
 
 module.exports = router;
