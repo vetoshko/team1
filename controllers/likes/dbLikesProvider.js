@@ -7,7 +7,7 @@ class DbLikesProvider {
     likeQuest(questId, userId, callback) {
         Quest.findByIdAndUpdate(
             questId,
-            {$push: {likes: userId}},
+            {$addToSet: {likes: userId}},
             callback
         );
     }
@@ -26,7 +26,7 @@ class DbLikesProvider {
     likePhoto(photoId, userId, callback) {
         Photo.findByIdAndUpdate(
             photoId,
-            {$push: {likes: userId}},
+            {$addToSet: {likes: userId}},
             callback
         );
     }
