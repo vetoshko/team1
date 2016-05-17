@@ -11,7 +11,7 @@ router.get('/signup', signup.get);
 router.post('/signup', signup.post);
 
 router.get('/signin', signin.get);
-router.post('/signin', passport.authenticate('local'), signin.post);
+router.post('/signin', signin.post);
 
 router.get('/signout', signout);
 
