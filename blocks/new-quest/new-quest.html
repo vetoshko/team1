@@ -1,6 +1,6 @@
 <div class="new-quest">
     <div class="new-quest__info">
-        <form class="new-quest-info__upload" action="/quests/new-quest" method="post">
+        <form class="new-quest-info__upload" action="/quests/new-quest" method="post" enctype="multipart/form-data">
             <input type="text" name="name" class="new-quest-info__name" placeholder="Имя квеста" />
             <textarea rows="4" name="description" class="new-quest-info__description"
                       placeholder="Описание" required></textarea>

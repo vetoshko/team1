@@ -120,7 +120,8 @@ describe('Auth tests', function () {
                 username: 'typicalUnexistingUser',
                 password: 'typicalPassword'
             })
-            .expect(401, done);
+            .expect(302)
+            .expect('Location', '/signin', done);
     });
 
     it('should not sign in user with incorrect password', (done) => {
@@ -130,6 +131,7 @@ describe('Auth tests', function () {
                 username: 'typicalUser',
                 password: 'typicalWrongPassword'
             })
-            .expect(401, done);
+            .expect(302)
+            .expect('Location', '/signin', done);
     });
 });

@@ -14,7 +14,7 @@ var getAll = function (callback) {
     }).then(function (response) {
         return response.json();
     }).then(function (text) {
-        callback(text);
+        callback(null, text);
     }).catch(err => {
         callback(err);
     });
@@ -30,7 +30,10 @@ export default class QuestList extends React.Component {
     }
 
     componentDidMount() {
-        getAll(data => {
+        getAll((err, data) => {
+            if (err) {
+                console.error('Quests load error :' + err);
+            }
             this.setState({quests: data});
         });
     }
