@@ -13,8 +13,8 @@ var getAll = function (callback) {
         })
     }).then(function (response) {
         return response.json();
-    }).then(function (text) {
-        callback(null, text);
+    }).then(function (jsonResponse) {
+        callback(null, jsonResponse.quests);
     }).catch(err => {
         callback(err);
     });
@@ -32,7 +32,8 @@ export default class QuestList extends React.Component {
     componentDidMount() {
         getAll((err, data) => {
             if (err) {
-                console.error('Quests load error :' + err);
+                console.log('Quests load error :' + err);
+                return;
             }
             this.setState({quests: data});
         });
@@ -45,7 +46,7 @@ export default class QuestList extends React.Component {
                                     id={quest._id}
                                     quest={quest}
                                     link={quest.photo[0].link}
-                                    likes={quest.likes.length}
+                                    likes={quest.likes}
                                     date={moment(quest.date).format('MMMM DD, YYYY')}/>
         );
 

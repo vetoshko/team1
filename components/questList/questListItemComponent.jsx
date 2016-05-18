@@ -32,7 +32,7 @@ export default class QuestListItemComponent extends React.Component {
                         <time className="quest-list__date">{this.props.date}</time>
                     </div>
                     <div className="quest-list__likes" onclick={this.likeshandle()}>
-                        <div className="quest-list__like-count">{this.props.likes}</div>
+                        <div className="quest-list__like-count">{this.props.likes.length}</div>
                         <div className="quest-list__like-icon">
                             <i className="fa fa-heart-o" aria-hidden="true"></i>
                         </div>
