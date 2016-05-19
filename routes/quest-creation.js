@@ -5,8 +5,8 @@ var multer = require('multer');
 var upload = multer({ dest: './uploads/'});
 var loginRequired = require('../middlewares/auth.js').loginRequired;
 
-router.post('/', loginRequired, upload.array('photo', 15), questCreation.post);
+router.post('/', loginRequired(), upload.array('photo', 15), questCreation.post);
 
-router.get('/', loginRequired, questCreation.get);
+router.get('/', loginRequired(true), questCreation.get);
 
 module.exports = router;
