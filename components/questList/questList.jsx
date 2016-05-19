@@ -8,6 +8,7 @@ import QuestListItemComponent from "./questListItemComponent.jsx";
 var getAll = function (callback) {
     fetch('/quests/questsList', {
         method: 'get',
+        credentials: 'same-origin',
         headers: new Headers({
             'Content-Type': 'application/json'
         })

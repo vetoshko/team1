@@ -13,6 +13,11 @@ module.exports.list = function (req, res) {
             if (err) {
                 console.log(err);
             } else {
+                quests.forEach(quest => {
+                    quest._doc.isLiked = req.user && quest
+                            .likes
+                            .findIndex(x => x.equals(req.user._id)) >= 0;
+                });
                 res.json({quests});
             }
         });
