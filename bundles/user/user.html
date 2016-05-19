@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    {% if not isDev %}
+    <link rel="stylesheet" href="{{ bundleBase }}user.bundle.css">
+    {% endif %}
+</head>
+<body>
+{% include "../../blocks/header/header.html" %}
+<main class="main">
+    <div id="user" class="user-container"></div>
+</main>
+{% include "../../blocks/footer/footer.html" %}
+<script type="text/javascript" src="{{ bundleBase }}user.bundle.js"></script>
+</body>
+</html>

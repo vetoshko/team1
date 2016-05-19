@@ -8,7 +8,6 @@ import QuestListItemComponent from "./questListItemComponent.jsx";
 var getAll = function (callback) {
     fetch('/quests/questsList', {
         method: 'get',
-        credentials: 'same-origin',
         headers: new Headers({
             'Content-Type': 'application/json'
         })
@@ -48,13 +47,23 @@ export default class QuestList extends React.Component {
                                     quest={quest}
                                     link={quest.photo[0].link}
                                     likes={quest.likes}
-                                    date={moment(quest.date).format('MMMM DD, YYYY')}/>
+                                    date={moment(quest.date).format('MMMM DD, YYYY')}
+                                    checkin={this.props.checkin}
+                                    own={this.props.own}/>
         );
 
         return (
-            <ul className='quest-list'>
-                {questNodes}
-            </ul>
+            <div className="quest-list">
+                {this.props.checkin ? <h1 className="quest-list__title">
+                    начатые и пройденные квесты
+                </h1> : null}
+                {this.props.own ? <h1 className="quest-list__title">
+                    созданные квесты
+                </h1> : null}
+                <ul className='quest-list__list'>
+                    {questNodes}
+                </ul>
+            </div>
         );
     }
 }
