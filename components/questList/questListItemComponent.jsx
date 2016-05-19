@@ -10,7 +10,7 @@ export default class QuestListItemComponent extends React.Component {
         return (
             <li className="quest-list__item" id={this.props.id}>
                 <h3 className="quest-list__field-name">
-                    <a href="#">{this.props.quest.name}</a>
+                    <a href={"/quests/"+this.props.quest._id}>{this.props.quest.name}</a>
                 </h3>
                 <div className="quest-list__author">
                     <i className="fa fa-user" aria-hidden="true"></i>
