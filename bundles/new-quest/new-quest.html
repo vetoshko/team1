@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Добавление квеста</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     {% if not isDev %}
-        <link rel="stylesheet" href="{{ bundleBase }}new-quest.bundle.css">
+    <link rel="stylesheet" href="{{ bundleBase }}newQuest.bundle.css">
     {% endif %}
-    <script type="text/javascript" src="{{ bundleBase }}new-quest.bundle.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Exo+2:400,700,400italic" rel="stylesheet"
-          type="text/css">
 </head>
 <body>
 {% include "../../blocks/header/header.html" %}
-
-{% include "../../blocks/new-quest/new-quest.html" %}
-
+<main class="main">
+    {% include "../../blocks/new-quest/new-quest.html" %}
+</main>
 {% include "../../blocks/footer/footer.html" %}
-
+<script type="text/javascript" src="{{ bundleBase }}newQuest.bundle.js"></script>
+<script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 </body>
 </html>

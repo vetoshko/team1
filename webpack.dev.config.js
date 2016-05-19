@@ -15,7 +15,7 @@ module.exports = {
         quest: './quest/quest.js',
         quests: './quests/quests.js',
         search: './search/search.js',
-        'new-quest': './new-quest/new-quest.js',
+        newQuest: './new-quest/new-quest.js',
         notification: './notification/notification.js'
     },
 
