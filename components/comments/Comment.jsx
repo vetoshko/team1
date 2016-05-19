@@ -4,7 +4,7 @@ export default class Comment extends React.Component {
     constructor(params) {
         super(params);
         this.state = {
-            username: params.username,
+            username: params.author,
             text: params.text,
             date: params.date,
             id: params._id
@@ -16,7 +16,7 @@ export default class Comment extends React.Component {
             <li>
                 <div className="comment-info">
                     <div className="comment-info__author">
-                        {this.state.id}. {this.state.username}
+                        {this.state.username}
                     </div>
                     <div className="comment-info__date">
                         {this.state.date}
