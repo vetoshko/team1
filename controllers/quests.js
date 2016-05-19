@@ -7,7 +7,7 @@ module.exports.getListPage = function (req, res) {
 };
 
 module.exports.list = function (req, res) {
-    QuestModel.find({})
+    Quest.find({})
         .populate('author', 'username')
         .exec(function (err, quests) {
             if (err) {
