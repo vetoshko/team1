@@ -1,7 +1,27 @@
 .quest-list
-    padding 0
-    margin 20px auto
-    width 60%
+    column-width 260px
+    -moz-column-width 260px
+    column-gap 40px
+    -moz-column-gap 40px
+    -moz-column-count 6
 
-.quest-list__title
-    text-transform uppercase
+    margin 0 40px 50px
+    padding-left 0
+    color #777
+
+    &__empty-list-massage
+        margin 60px 40px
+        font 300 1em 'Graphik Web', Helvetica, Arial, sans-serif
+        color #a9a9a9
+        text-align center
+
+    &__empty-list-massage a
+        color #8e8d8d
+
+*:before,
+*:after
+    box-sizing border-box !important
+
+@media screen and (max-width: 450px)
+    .quest-list
+        margin 0 0 50px

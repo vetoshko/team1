@@ -108,4 +108,4 @@ export function render(url) {
         <Quest url={url} />,
         document.getElementById('quest-info')
     );
-};
+}

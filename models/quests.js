@@ -96,10 +96,12 @@ var questSchema = new Schema({
 
 questSchema.plugin(mongoosastic, {
     host: esHost,
-    port: esPort
+    port: esPort,
     // protocol: "https",
     // auth: "username:password",
     // curlDebug: true
+    hydrate: true,
+    hydrateOptions: {lean: true}
 });
 
 module.exports = {

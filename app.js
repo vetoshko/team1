@@ -14,7 +14,6 @@ var MongoStore = require('connect-mongo')(expressSession);
 //routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var searchRoute = require('./routes/search');
 var authRoutes = require('./routes/auth');
 var questRoutes = require('./routes/quests');
 var questCreationRoutes = require('./routes/quest-creation');
@@ -72,7 +71,6 @@ app.use('/', authRoutes);
 app.use('/', commentRoutes);
 app.use('/', likeRoutes);
 app.use('/quests/new-quest', questCreationRoutes);
-app.use('/quests/search', searchRoute);
 app.use('/quests', questRoutes);
 app.use('/notification', notificationRoutes);
 

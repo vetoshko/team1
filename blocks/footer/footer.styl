@@ -1,0 +1,36 @@
+.footer
+    margin-top auto
+    font 400 9px 'Graphik Web', Helvetica, Arial, sans-serif
+    text-transform uppercase
+    letter-spacing 1px
+    color #fff
+
+    background-color #25313C
+    line-height 22px
+    padding 28px 0
+    text-align center
+
+    &__credit a
+        color inherit
+
+    &__container
+        position relative
+        margin 0 auto
+        padding 0 15px
+
+    &__container:before,
+    &__container:after
+        content " "
+        display table
+        box-sizing border-box
+
+    &__copyright
+        margin-right 10px
+
+    &__copyright,
+    &__credit
+        display inline-block
+
+@media screen and (max-width: 980px)
+    .footer
+        padding 12px 0

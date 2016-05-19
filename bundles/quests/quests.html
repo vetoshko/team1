@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -11,10 +12,12 @@
 </head>
 <body>
 {% include "../../blocks/header/header.html" %}
-<main class="main">
+<section class="search-section">
     {% include "../../blocks/search-form/search-form.html" %}
+</section>
+<section class="quest-section">
     <div id="list" class="quest-list-container"></div>
-</main>
+</section>
 {% include "../../blocks/footer/footer.html" %}
 <script type="text/javascript" src="{{ bundleBase }}quests.bundle.js"></script>
 </body>

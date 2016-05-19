@@ -1,12 +1,13 @@
 <header class="header">
     <a href="/" class="header__title">photoquest</a>
-    <div class="header__buttons">
-        <!--<div class="logged-in">Вы вошли как <a>{{ user }}</a></div>-->
+    <input class="header__menu-btn" type="checkbox" id="menu-btn"/>
+    <label class="header__menu-icon" for="menu-btn"><span class="header__navicon"></span></label>
+    <nav class="header__menu">
         {% if user %}
-            <a href="/signout" class="header__logout">выйти</a>
+        <a href="/signout" class="header__button">выйти</a>
         {% else %}
-            <a href="/signin" class="header__login">войти</a>
-            <a href="/signup" class="header__signup">зарегистрироваться</a>
+        <a href="/signin" class="header__button">войти</a>
+        <a href="/signup" class="header__button">зарегистрироваться</a>
         {% endif %}
-    </div>
+    </nav>
 </header>

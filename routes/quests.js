@@ -6,6 +6,7 @@ var questControllers = require('../controllers/quests.js');
 
 router.get('/', questControllers.getListPage);
 router.get('/questsList', questControllers.list);
+router.post('/search', questControllers.search);
 router.get('/:questId', questControllers.get);
 router.get('/:questId/info', questControllers.getInfo);
 router.post('/:questId', loginRequired(), questControllers.edit);

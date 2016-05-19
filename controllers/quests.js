@@ -116,3 +116,13 @@ module.exports.deletePhoto = function (req, res) {
             res.status(updated.n ? 200 : 400).send();
         });
 };
+
+module.exports.search = function (req, res) {
+    Quest.search({query_string: {query: req.body.search}}, (err, result) => {
+        if (!err) {
+            res.json({hits: result.hits.hits});
+        } else {
+            res.send({hits: []});
+        }
+    });
+};
