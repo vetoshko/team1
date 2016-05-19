@@ -12,7 +12,7 @@ export default class QuestListItemComponent extends React.Component {
         const dislikedHeartClass = 'fa-heart-o';
         const url = `/quests/${id}/likes`;
         fetch(url, {
-            method: (isLiked ? 'delete': 'post'),
+            method: (isLiked ? 'delete' : 'post'),
             credentials: 'same-origin'
         })
             .then((data) => {
