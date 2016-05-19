@@ -21,7 +21,8 @@ function fillUsers(id, callback) {
         _id: id,
         username: faker.internet.userName(),
         email: faker.internet.email(),
-        phone: faker.phone.phoneNumberFormat()
+        phone: faker.phone.phoneNumberFormat(),
+        createdAt: null
     }), faker.internet.password(), err => {
         err ? callback(err) : callback();
     });

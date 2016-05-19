@@ -4,7 +4,7 @@ var passport = require('passport');
 
 module.exports.post = function (req, res) {
     passport.authenticate('local', (err, user) => {
-        if (err || !user) {
+        if (err || !user || user.createdAt) {
             return res.redirect('/signin');
         }
 

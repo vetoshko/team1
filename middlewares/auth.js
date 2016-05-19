@@ -12,3 +12,14 @@ module.exports.loginRequired = (needRedirect) => {
         return res.sendStatus(401);
     };
 };
+
+module.exports.setUserRole = (req, res, next) => {
+    var userRole;
+    if (!req.user) {
+        userRole = 'anon';
+    } else {
+        userRole = req.user.username === 'admin' ? 'admin' : 'user';
+    }
+    req.userRole = userRole;
+    next();
+};
