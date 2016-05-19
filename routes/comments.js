@@ -13,17 +13,17 @@ router.get(
 
 router.post(
     '/quests/:questId/comments',
-    loginRequired,
+    loginRequired(),
     (req, res) => commentsController.create(req, res));
 
 router.put(
     '/quests/:questId/comments',
-    loginRequired,
+    loginRequired(),
     (req, res) => commentsController.edit(req, res));
 
 router.delete(
     '/quests/:questId/comments',
-    loginRequired,
+    loginRequired(),
     (req, res) => commentsController.delete(req, res));
 
 module.exports = router;

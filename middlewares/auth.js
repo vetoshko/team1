@@ -1,8 +1,14 @@
-module.exports.loginRequired = (req, res, next) => {
-    if (req.user) {
-        return next();
-    }
+module.exports.loginRequired = (needRedirect) => {
+    return (req, res, next) => {
+        if (req.user) {
+            return next();
+        }
 
-    req.session.deniedAddress = req.originalUrl;
-    res.redirect('/signin');
+        if (needRedirect) {
+            req.session.deniedAddress = req.originalUrl;
+            return res.redirect('/signin');
+        }
+
+        return res.sendStatus(401);
+    };
 };

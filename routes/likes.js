@@ -9,21 +9,21 @@ var likesController = new LikesController(new DbLikesProvider());
 
 router.post(
     '/quests/:questId/likes',
-    loginRequired,
+    loginRequired(),
     (req, res) => likesController.likeQuest(req, res));
 
 router.delete(
     '/quests/:questId/likes',
-    loginRequired,
+    loginRequired(),
     (req, res) => likesController.dislikeQuest(req, res));
 
 router.post(
     '/photos/:photoId/likes',
-    loginRequired,
+    loginRequired(),
     (req, res) => likesController.likePhoto(req, res));
 
 router.delete('/photos/:photoId/likes',
-    loginRequired,
+    loginRequired(),
     (req, res) => likesController.dislikePhoto(req, res));
 
 module.exports = router;
