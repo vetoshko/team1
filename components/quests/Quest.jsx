@@ -9,6 +9,7 @@ export class Quest extends React.Component {
     constructor(params) {
         super(params);
         this.state = {
+            _id: params._id,
             name: params.name,
             author: params.author,
             description: params.description,
@@ -28,7 +29,8 @@ export class Quest extends React.Component {
             method: 'get',
             headers: new Headers({
                 'Content-Type': 'application/json'
-            })
+            }),
+            credentials: 'same-origin'
         }).then(function (response) {
             return response.json();
         }).then(function (text) {
@@ -47,9 +49,10 @@ export class Quest extends React.Component {
 
     deleteQuest() {
         fetch(this.state.url, {
-            method: 'delete'
+            method: 'delete',
+            credentials: 'same-origin'
         });
-        window.open('quests/')
+        location.assign('/quests');
     }
 
     render() {
@@ -94,7 +97,7 @@ export class Quest extends React.Component {
                 </div>
                 <input className="quest-form__edit-button" type="button" value="Редактировать" onClick={this.edit.bind(this)}/>
                 <input className="quest-form__delete-button" type="button" value="Удалить" onClick={this.deleteQuest.bind(this)}/>
-                <CommentList comments={this.state.comments} key={this.state.url}/>
+                <CommentList comments={this.state.comments} id={this.state._id} key={this.state.url}/>
             </div>
         );
     }

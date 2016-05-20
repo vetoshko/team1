@@ -7,6 +7,11 @@ var DbUsersProvider = require('../controllers/users/dbUsersProvider').DbUsersPro
 
 var usersController = new UsersController(new DbUsersProvider());
 
+router.get('/getCurrentUser', loginRequired(), function (req, res) {
+    console.log(req.user);
+    res.json({user: req.user, userRole: req.userRole});
+});
+
 router.get('/:userId', loginRequired(), function (req, res) {
     usersController.getUser(req, res);
 });
