@@ -13,7 +13,7 @@ function sendMail(mailOptions, done) {
 
 module.exports.sendVerificationMail = function (message, done) {
     var mailOptions = {
-        from: 'noreply',
+        from: `TEAM1<${smtp.auth.user}>`,
         to: message.email,
         subject: 'Добро пожаловать!',
         html: 'Уважаемый ' + message.name + '! Добро пожаловать на наш сервис. Для завершения ' +

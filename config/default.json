@@ -6,11 +6,12 @@
     "connectionString": "mongodb://team1-urfu2015:team1-urfu2015@ds011429.mlab.com:11429/team1-urfu2015"
   },
   "smtp": {
-    "host": "smtp.gmail.com",
-    "port": 587,
+    "host": "smtp.mail.ru",
+    "port": 465,
+    "secure":true,
     "auth": {
-      "user": "urfu2016team1@gmail.com",
-      "pass": "urfu2016team"
+      "user": "urfu2016team1@mail.ru",
+      "pass": "team1-urfu2015"
     },
     "connectionString": "mongodb://127.0.0.1"
   },
