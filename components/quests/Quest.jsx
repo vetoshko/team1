@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CommentList from "../comments/CommentList.jsx";
-import PhotoList from "../photos/PhotoList.jsx";
 import QuestEdit from "./QuestEdit.jsx";
 import 'whatwg-fetch';
 
@@ -21,11 +20,67 @@ export class Quest extends React.Component {
         };
     }
 
-    componentWillMount() {
-        var done = (data => {
-            this.setState(data.quest);
+    getRoles(quest, callback) {
+        var done = ((err, data) => {
+            if (err) {
+                console.log(err);
+            } else {
+                this.setState({
+                    quest,
+                    userRole: data.userRole,
+                    questStatus: data.questStatus,
+                    photosStatus: data.photos
+                }, callback);
+            }
         });
-        fetch(this.state.url +'/info', {
+        fetch('/users/getCurrentState?questId=' + quest._id, {
+            method: 'get',
+            credentials: 'same-origin'
+        }).then(function(response) {
+            return response.json();
+        }).then(function(text) {
+            done(null, text);
+        }).catch(err => {
+            done(err);
+        });
+    }
+
+    startQuest() {
+        console.log('hi');
+        var done = ((err, data) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(data);
+            }
+        });
+        fetch('/users/startQuest', {
+            method: 'post',
+            headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json'
+           },
+            credentials: 'same-origin',
+            body: JSON.stringify({questId: this.state._id})
+        }).then(function(response) {
+            console.log(response);
+            return response.json();
+        }).catch(err => {
+            done(err);
+        });
+    }
+
+    componentWillMount() {
+        var done = ((err, data) => {
+            if (err) {
+                console.log(err);
+            } else {
+                this.getRoles(data.quest, () => {
+                    this.setState(data.quest);
+                });
+            }
+        });
+        fetch(this.state.url + '/info', {
             method: 'get',
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -33,8 +88,8 @@ export class Quest extends React.Component {
             credentials: 'same-origin'
         }).then(function (response) {
             return response.json();
-        }).then(function (text) {
-            done(text);
+        }).then(function(text) {
+            done(null, text);
         }).catch(err => {
             done(err);
         });
@@ -42,9 +97,7 @@ export class Quest extends React.Component {
 
     edit() {
         ReactDOM.render(
-            <QuestEdit url={this.state.url} />,
-            document.getElementById('quest-info')
-        );
+            <QuestEdit url={this.state.url}/>, document.getElementById('quest-info'));
     }
 
     deleteQuest() {
@@ -62,21 +115,50 @@ export class Quest extends React.Component {
         } else {
             likesAmount = this.state.likes.length
         }
-        var photos = this.state.photo ? this.state.photo.map(
-            (photo) =>
-                <div className="photo-list" key={photo._id}>
-                    <img src={photo.link}/>
-                    <div className="photo__description">
-                        {photo.description}
-                    </div>
-                </div>) : '';
+        var photos = this.state.photo
+            ? this.state.photo.map((photo) => {
+                var photoElement;
+                if (this.state.photosStatus && !this.state.photosStatus[photo._id] && this.state.userRole === 'user') {
+                    return (
+                        <div className="photo-list" key={photo._id}>
+                            <img src={photo.link}/>
+                            <div className="photo__description">
+                                {photo.description}
+                            </div>
+                            <input type="button" value="Сдать"/>
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div className="photo-list" key={photo._id}>
+                            <img src={photo.link}/>
+                            <div className="photo__description">
+                                {photo.description}
+                            </div>
+                        </div>
+                    )
+                }
+                {photoElement}
+            })
+            : '';
+
+        var buttonsBlock = this.state.userRole === 'admin' || this.state.userRole === 'user'
+            ? <div className="buttons">
+                    <input className="quest-form__edit-button" type="button" value="Редактировать" onClick={this.edit.bind(this)}/>
+                    <input className="quest-form__delete-button" type="button" value="Удалить" onClick={this.deleteQuest.bind(this)}/>
+                </div>
+            : '';
+        var startButton = this.state.questStatus === 'notStarted' && this.state.userRole === 'user'
+            ? (<input className="" type="button" value="Начать квест" onClick={this.startQuest.bind(this)}/>)
+            : '';
         return (
             <div className="quest-info">
                 <div className="quest-info__name">
                     {this.state.name}
                 </div>
                 <div className="quest-info__likes">
-                    {likesAmount} ♥
+                    {likesAmount}
+                    ♥
                 </div>
                 <div className="quest-info__author">
                     {this.state.author}
@@ -95,9 +177,9 @@ export class Quest extends React.Component {
                         {photos}
                     </ul>
                 </div>
-                <input className="quest-form__edit-button" type="button" value="Редактировать" onClick={this.edit.bind(this)}/>
-                <input className="quest-form__delete-button" type="button" value="Удалить" onClick={this.deleteQuest.bind(this)}/>
                 <CommentList comments={this.state.comments} id={this.state._id} key={this.state.url}/>
+                {buttonsBlock}
+                {startButton}
             </div>
         );
     }
