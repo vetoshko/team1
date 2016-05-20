@@ -20,6 +20,6 @@ module.exports.post = function (req, res) {
 };
 
 module.exports.get = function (req, res) {
-    req.session.beforeSigninAddress |= req.get('Referer');
+    req.session.beforeSigninAddress = req.session.beforeSigninAddress || req.get('Referer');
     res.render('signin/signin', { });
 };
