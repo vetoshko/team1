@@ -16,7 +16,9 @@ export default class QuestListItemComponent extends React.Component {
             credentials: 'same-origin'
         })
             .then((data) => {
-                if (!isLiked && data.status === 201) {
+                if (data.status === 401) {
+                    location.assign('/signin');
+                } else if (!isLiked && data.status === 201) {
                     likeIcon.classList.add(likedHeartClass);
                     likeIcon.classList.remove(dislikedHeartClass);
                     likesCount.innerText = parseInt(likesCount.innerText, 10) + 1;

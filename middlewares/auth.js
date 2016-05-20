@@ -8,7 +8,6 @@ module.exports.loginRequired = (needRedirect) => {
             req.session.deniedAddress = req.originalUrl;
             return res.redirect('/signin');
         }
-
         return res.sendStatus(401);
     };
 };
