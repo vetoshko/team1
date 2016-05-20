@@ -25,7 +25,6 @@ class CommentsController {
     create(req, res) {
         var questId = req.params.questId;
         var text = req.body.text;
-        console.log(req.user);
         var comment = new Comment({
             author: req.user,
             text
