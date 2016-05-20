@@ -8,14 +8,12 @@ class LikesController {
     likeQuest(req, res) {
         var questId = req.params.questId;
         var userId = req.user._id;
-        console.log(this);
-        console.log(this.likesProvider);
         this.likesProvider.likeQuest(questId, userId, (err, updatedDoc) => {
             if (err) {
-                return res.status(500).send();
+                return res.sendStatus(500);
             }
             if (!updatedDoc) {
-                return res.status(400).send();
+                return res.sendStatus(400);
             }
             res.sendStatus(201);
         });
@@ -24,15 +22,13 @@ class LikesController {
     dislikeQuest(req, res) {
         var questId = req.params.questId;
         var userId = req.user._id;
-        console.log(req.user);
         this.likesProvider.dislikeQuest(questId, userId, (err, updatedDoc) => {
             if (err) {
-                return res.status(500).send();
+                return res.sendStatus(500);
             }
             if (!updatedDoc) {
-                return res.status(400).send();
+                return res.sendStatus(400);
             }
-            console.log(updatedDoc);
             res.sendStatus(200);
         });
     }
@@ -42,11 +38,12 @@ class LikesController {
         var userId = req.user._id;
         this.likesProvider.likePhoto(photoId, userId, (err, updatedDoc) => {
             if (err) {
-                return res.status(500).send();
+                return res.sendStatus(500);
             }
             if (!updatedDoc) {
-                return res.status(400).send();
+                return res.sendStatus(400);
             }
+
             res.sendStatus(201);
         });
     }
@@ -56,10 +53,10 @@ class LikesController {
         var userId = req.user._id;
         this.likesProvider.dislikePhoto(photoId, userId, (err, updatedDoc) => {
             if (err) {
-                return res.status(500).send();
+                return res.sendStatus(500);
             }
             if (!updatedDoc) {
-                return res.status(400).send();
+                return res.sendStatus(400);
             }
             res.sendStatus(200);
         });
