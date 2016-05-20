@@ -21,6 +21,9 @@ var questCreationRoutes = require('./routes/quest-creation');
 var commentRoutes = require('./routes/comments');
 var likeRoutes = require('./routes/likes');
 
+//middlewares
+var authMiddlewares = require('./middlewares/auth.js');
+
 var secretKey = require('config').get('secretKey');
 
 var cloudinary = require('cloudinary');
@@ -52,9 +55,11 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(authMiddlewares.setUserRole);
 
 app.use(function (req, res, next) {
     res.locals.user = req.user;
+    res.locals.userRole = req.userRole;
     next();
 });
 

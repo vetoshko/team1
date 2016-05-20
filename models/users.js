@@ -16,7 +16,12 @@ var userSchema = new Schema({
         expires: 60 * 60 * 24
     },
     resetPasswordToken: String,
-    resetPasswordExpires: Date
+    resetPasswordExpires: Date,
+    startedQuests: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Quest',
+        es_indexed: false
+    }]
 });
 
 userSchema.plugin(passportLocalMongoose);
