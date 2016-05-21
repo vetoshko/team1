@@ -20,22 +20,31 @@ router.get('/getCurrentUser', loginRequired(), function (req, res) {
 
 router.get('/getCurrentState', (req, res) => {
     var resultObject = {};
-    Statuses.isPhotosChecked(req.user._id, req.query.questId).then(
-        result => {
-            resultObject.photos = result;
-            Statuses.getUserRole(req.user, req.query.questId).then(
-                result => {
-                    resultObject.questStatus = result;
-                    resultObject.userRole = req.userRole;
-                    res.json(resultObject);
-                },
-                err => {
-                    console.log(err);
-                });
-        },
-        err => {
-            console.log(err);
+    if (!req.user) {
+        res.json({
+            photos: null,
+            questStatus: 'none',
+            userRole: req.userRole
         });
+    } else {
+        Statuses.isPhotosChecked(req.user._id, req.query.questId).then(
+            result => {
+                resultObject.photos = result;
+                Statuses.getUserRole(req.user, req.query.questId).then(
+                    result => {
+                        resultObject.questStatus = result;
+                        resultObject.userRole = req.userRole;
+                        res.json(resultObject);
+                    },
+                    err => {
+                        console.log(err);
+                    });
+            },
+            err => {
+                console.log(err);
+            });
+    }
+
 });
 
 router.post('/startQuest', (req, res) => {
