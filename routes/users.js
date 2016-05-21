@@ -11,8 +11,11 @@ var Statuses = require('../scripts/QuestUserStatus');
 var changeStatus = require('../scripts/ChangeQuestStatus');
 
 router.get('/getCurrentUser', loginRequired(), function (req, res) {
-    console.log(req.user);
-    res.json({user: req.user, userRole: req.userRole});
+    req.user
+        .populate('startedQuests')
+        .populate('ownedQuests', (err, user) => {
+            res.json({user: req.user, userRole: req.userRole});
+        });
 });
 
 router.get('/getCurrentState', (req, res) => {
@@ -45,7 +48,16 @@ router.post('/startQuest', (req, res) => {
     });
 });
 
-router.get('/:userId', loginRequired(), function (req, res) {
+router.get('/profile', loginRequired(true), (req, res) => {
+    res.redirect(`/users/${req.user._id}/profile`);
+});
+
+router.get('/:userId/profile', (req, res) => {
+    res.render('user/user', {userId: req.params.userId.toString()});
+});
+
+
+router.get('/:userId', function (req, res) {
     usersController.getUser(req, res);
 });
 
@@ -53,5 +65,6 @@ router.get('/:userId', loginRequired(), function (req, res) {
 router.put('/:userId', loginRequired(), function (req, res) {
     usersController.editUser(req, res);
 });
+
 
 module.exports = router;

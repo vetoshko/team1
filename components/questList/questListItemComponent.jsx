@@ -46,7 +46,7 @@ export default class QuestListItemComponent extends React.Component {
                     </h3>
                     <div className="quest-list__author">
                         <i className="fa fa-user" aria-hidden="true"></i>
-                        <a href="#"
+                        <a href={`/users/${this.props.quest.author._id}/profile`}
                            className="quest-list__link">{this.props.quest.author.username}</a>
                     </div>
                     <div className="quest-list__date-container">

@@ -16,7 +16,15 @@ class DbUsersProvider {
     }
 
     getUserById(userId, callback) {
-        User.findById(userId, callback);
+        User.findById(userId)
+            .populate({
+                path: 'startedQuests ownedQuests',
+                populate: {
+                    path: 'author',
+                    select: 'username'
+                }
+            })
+            .exec(callback);
     }
 }
 

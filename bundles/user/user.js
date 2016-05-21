@@ -1,3 +1,3 @@
 require('./user.styl');
 
-require('../../components/user/user.jsx');
+require('../../components/user/UserComponent.jsx');
