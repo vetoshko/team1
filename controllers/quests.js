@@ -62,6 +62,32 @@ module.exports.edit = function (req, res) {
     );
 };
 
+module.exports.editPhotoDescription = function (req, res) {
+    var questId = req.params.questId;
+    var photoId = req.params.photoId;
+    Quest.update({
+            _id: questId,
+            photo: {
+                $elemMatch: {
+                    _id: photoId
+                }
+            }
+        },
+        {
+            $set: {
+                'photo.$.description': req.body.description
+            }
+        },
+        (err) => {
+            if (err) {
+                res.sendStatus(500);
+            } else {
+                res.sendStatus(200);
+            }
+        }
+    );
+};
+
 module.exports.delete = function (req, res) {
     var questId = req.params.questId;
     Quest.remove(
@@ -110,6 +136,7 @@ module.exports.deletePhoto = function (req, res) {
             }
         },
         (err, updated) => {
+            console.log(updated);
             if (err) {
                 return res.status(500).send();
             }

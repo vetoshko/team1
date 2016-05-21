@@ -12,6 +12,7 @@ router.get('/:questId/info', questControllers.getInfo);
 router.post('/:questId', loginRequired(), questControllers.edit);
 router.delete('/:questId', loginRequired(), questControllers.delete);
 router.put('/:questId', loginRequired(), questControllers.addPhoto);
+router.put('/:questId/:photoId', loginRequired(), questControllers.editPhotoDescription);
 router.delete('/:questId/:photoId', loginRequired(), questControllers.deletePhoto);
 
 module.exports = router;

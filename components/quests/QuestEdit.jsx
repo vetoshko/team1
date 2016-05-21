@@ -9,34 +9,17 @@ export default class QuestEdit extends React.Component {
     constructor(params) {
         super(params);
         this.state = {
-            id: params.id,
+            _id: params._id,
             name: params.name,
             author: params.author,
             description: params.description,
             city: params.city,
             comments: params.comments,
-            photos: params.photo,
+            photo: params.photo,
             likes: params.likes,
             url: params.url
         };
-    }
-
-    componentWillMount() {
-        var done = (data => {
-            this.setState(data.quest);
-        });
-        fetch(this.state.url +'/info', {
-            method: 'get',
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        }).then(function (response) {
-            return response.json();
-        }).then(function (text) {
-            done(text);
-        }).catch(err => {
-            done(err);
-        });
+        console.log(this.state);
     }
 
     change(param, element) {
@@ -53,13 +36,14 @@ export default class QuestEdit extends React.Component {
                 document.getElementById('quest-info')
             );
         };
-        fetch('/quests/'+this.state.id, {
+        fetch('/quests/'+this.state._id, {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(this.state),
+            credentials: 'same-origin'
         }).then(function () {
             done(url);
         }).catch(err => {
@@ -76,7 +60,7 @@ export default class QuestEdit extends React.Component {
                        value={this.state.city || ''} onChange={this.change.bind(this, 'city')}/>
                 <input className="quest-form__description" type="text"
                        value={this.state.description || ''} onChange={this.change.bind(this, 'description')} />
-                <PhotoListEdit photos={this.state.photos} />
+                <PhotoListEdit photos={this.state.photo} questId={this.state._id} />
                 <input className="quest-form__save-button" type="button" value="Сохранить" onClick={this.save.bind(this)}/>
             </div>
         );

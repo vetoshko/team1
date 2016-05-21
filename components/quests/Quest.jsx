@@ -66,7 +66,6 @@ export class Quest extends React.Component {
             credentials: 'same-origin',
             body: JSON.stringify({questId: this.state._id})
         }).then(function(response) {
-            console.log(response);
             return response;
         }).then(function(text) {
             done(null, text);
@@ -102,7 +101,7 @@ export class Quest extends React.Component {
 
     edit() {
         ReactDOM.render(
-            <QuestEdit url={this.state.url}/>, document.getElementById('quest-info'));
+            <QuestEdit {...this.state}/>, document.getElementById('quest-info'));
     }
 
     deleteQuest() {
