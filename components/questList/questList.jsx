@@ -35,8 +35,17 @@ export default class QuestList extends React.Component {
                 console.log('Quests load error :' + err);
                 return;
             }
-            this.setState({quests: data});
+            this.setState({quests: this.orderQuests(data)});
         });
+    }
+
+    orderQuests(quests) {
+        return quests.sort((q1, q2) => {
+            if (q1.likes.length === q2.likes.length) {
+                return q2.date - q1.date;
+            }
+            return q2.likes.length - q1.likes.length;
+        })
     }
 
     render() {
