@@ -24,7 +24,7 @@ export default class CommentList extends React.Component {
             return response.json();
         }).then(json => {
             this.state.comments.push(this.commentObjectToReactComment(json.comment));
-            this.setState({});
+            this.setState({newComment: ""});
         });
     }
 
@@ -67,7 +67,7 @@ export default class CommentList extends React.Component {
                 <ul>
                     {commentNodes}
                 </ul>
-                <input className="comment-list__text-field" type="text" placeholder="Ваш комментарий" onChange={this.change.bind(this)}/>
+                <input className="comment-list__text-field" type="text" placeholder="Ваш комментарий" value={this.state.newComment} onChange={this.change.bind(this)}/>
                 <input className="comment-list__add-button" type="button" value="Добавить" onClick={this.addComment.bind(this)}/>
             </div>
         );
