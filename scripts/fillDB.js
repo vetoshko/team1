@@ -61,8 +61,15 @@ function fillQuests(usersId, callback) {
             })]
         }),
         likes: usersId.slice(0, Math.floor(Math.random() * peopleCount / 5))
-    }).save(err => {
-        err ? callback(err) : callback();
+    }).save((err, quest) => {
+        if (err) {
+            return callback(err);
+        }
+        User.findByIdAndUpdate(quest.author, {
+            $push: {
+                ownedQuests: quest
+            }
+        }, callback);
     });
 }
 
@@ -92,7 +99,7 @@ module.exports.fillDataBase = function (callback) {
         );
     }
 
-    async.parallel(functionsArray, err => {
+    async.series(functionsArray, err => {
         mongoose.disconnect(function () {
             console.log('All connections closed.');
         });

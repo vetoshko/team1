@@ -17,6 +17,11 @@ var userSchema = new Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
+    ownedQuests: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Quest',
+        es_indexed: false
+    }],
     startedQuests: [{
         type: Schema.Types.ObjectId,
         ref: 'Quest',

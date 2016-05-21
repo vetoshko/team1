@@ -24,6 +24,7 @@
     "cookie-parser": "~1.3.5",
     "crypto-js": "^3.1.6",
     "debug": "~2.2.0",
+    "exif-parser": "^0.1.9",
     "exports": "0.0.1",
     "exports-loader": "^0.6.3",
     "express": "~4.13.1",
@@ -44,7 +45,8 @@
     "serve-favicon": "~2.3.0",
     "sha256": "^0.2.0",
     "swig": "^1.4.2",
-    "whatwg-fetch": "^0.11.0"
+    "whatwg-fetch": "^0.11.0",
+    "yandex-map-react": "^1.0.0-beta.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
