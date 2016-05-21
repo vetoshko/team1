@@ -292,6 +292,18 @@ module.exports.fillDataBase = function (callback) {
         if (err) {
             console.log(err);
         } else {
+            console.log('Admin added');
+        }
+    });
+
+    User.register(new User({
+        username: 'user',
+        email: 'ab@ab.ab',
+        createdAt: null
+    }), 'user', err => {
+        if (err) {
+            console.log(err);
+        } else {
             console.log('User added');
         }
     });
