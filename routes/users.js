@@ -7,12 +7,13 @@ var DbUsersProvider = require('../controllers/users/dbUsersProvider').DbUsersPro
 
 var usersController = new UsersController(new DbUsersProvider());
 
+var Statuses = require('../scripts/QuestUserStatus');
+var changeStatus = require('../scripts/ChangeQuestStatus');
+
 router.get('/getCurrentUser', loginRequired(), function (req, res) {
     console.log(req.user);
     res.json({user: req.user, userRole: req.userRole});
-
-var Statuses = require('../scripts/QuestUserStatus');
-var changeStatus = require('../scripts/ChangeQuestStatus');
+});
 
 router.get('/getCurrentState', (req, res) => {
     var resultObject = {};

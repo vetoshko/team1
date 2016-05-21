@@ -46,12 +46,15 @@ export class Quest extends React.Component {
     }
 
     startQuest() {
-        console.log('hi');
         var done = ((err, data) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log(data);
+                if (data.status === 200) {
+                    this.setState({
+                        questStatus: 'started'
+                    });
+                }
             }
         });
         fetch('/users/startQuest', {
@@ -64,12 +67,14 @@ export class Quest extends React.Component {
             body: JSON.stringify({questId: this.state._id})
         }).then(function(response) {
             console.log(response);
-            return response.json();
+            return response;
+        }).then(function(text) {
+            done(null, text);
         }).catch(err => {
             done(err);
         });
-    }
 
+    }
     componentWillMount() {
         var done = ((err, data) => {
             if (err) {
@@ -110,6 +115,9 @@ export class Quest extends React.Component {
 
     render() {
         var likesAmount;
+        if (!this.state._id) {
+            return null;
+        }
         if (!this.state.likes) {
             likesAmount = 0;
         } else {
@@ -118,7 +126,8 @@ export class Quest extends React.Component {
         var photos = this.state.photo
             ? this.state.photo.map((photo) => {
                 var photoElement;
-                if (this.state.photosStatus && !this.state.photosStatus[photo._id] && this.state.userRole === 'user') {
+                if (this.state.photosStatus && !this.state.photosStatus[photo._id] &&
+                    this.state.userRole === 'user' && this.state.questStatus === 'started') {
                     return (
                         <div className="photo-list" key={photo._id}>
                             <img src={photo.link}/>
@@ -142,7 +151,7 @@ export class Quest extends React.Component {
             })
             : '';
 
-        var buttonsBlock = this.state.userRole === 'admin' || this.state.userRole === 'user'
+        var buttonsBlock = this.state.userRole === 'admin' || this.state.questStatus === 'author'
             ? <div className="buttons">
                     <input className="quest-form__edit-button" type="button" value="Редактировать" onClick={this.edit.bind(this)}/>
                     <input className="quest-form__delete-button" type="button" value="Удалить" onClick={this.deleteQuest.bind(this)}/>
@@ -177,9 +186,9 @@ export class Quest extends React.Component {
                         {photos}
                     </ul>
                 </div>
-                <CommentList comments={this.state.comments} id={this.state._id} key={this.state.url}/>
                 {buttonsBlock}
                 {startButton}
+                <CommentList comments={this.state.comments} id={this.state._id} key={this.state.url}/>
             </div>
         );
     }
