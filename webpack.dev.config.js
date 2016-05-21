@@ -15,7 +15,8 @@ module.exports = {
         quest: './quest/quest.js',
         quests: './quests/quests.js',
         newQuest: './new-quest/new-quest.js',
-        notification: './notification/notification.js'
+        notification: './notification/notification.js',
+        user: './user/user.js'
     },
 
     output: {

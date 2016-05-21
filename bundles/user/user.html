@@ -12,7 +12,7 @@
 <body>
 {% include "../../blocks/header/header.html" %}
 <main class="main">
-    <div id="user" class="user-container"></div>
+    <div id="user" class="user-container" data-userId={{ userId }}></div>
 </main>
 {% include "../../blocks/footer/footer.html" %}
 <script type="text/javascript" src="{{ bundleBase }}user.bundle.js"></script>
