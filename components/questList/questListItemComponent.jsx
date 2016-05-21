@@ -36,10 +36,17 @@ export default class QuestListItemComponent extends React.Component {
         var isLiked = this.props.quest.isLiked;
         return (
             <li className="quest-list__item" id={this.props.id}>
-                <h3 className="quest-list__field-name">
-                    <a href={"/quests/"+this.props.quest._id}>{this.props.quest.name}</a>
-                </h3>
-                <div className="quest-list__author">
+                {this.props.checkin ?
+                    <div className="quest-list__name-and-progress">
+                    <h3 className="quest-list__field-name">
+                        <a href={"/quests/"+this.props.quest._id}>{this.props.quest.name}</a>
+                    </h3>
+                    <div className="quest-list__progress"></div>
+                    </div> :
+                    <h3 className="quest-list__field-name">
+                        <a href={"/quests/"+this.props.quest._id}>{this.props.quest.name}</a>
+                    </h3>}
+                {this.props.own ? null : <div className="quest-list__author">
                     <i className="fa fa-user" aria-hidden="true"></i>
                     <a>{this.props.quest.author.username}</a>
                 </div>
