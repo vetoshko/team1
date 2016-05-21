@@ -30,6 +30,7 @@ module.exports.get = function (req, res) {
 module.exports.getInfo = function (req, res) {
     var questId = req.params.questId;
     Quest.findById(questId)
+        .populate('author', 'username')
         .exec((err, quest) => {
             if (err) {
                 return res.status(500).send();
@@ -37,6 +38,9 @@ module.exports.getInfo = function (req, res) {
             if (!quest) {
                 return res.status(400).send();
             }
+            quest._doc.isLiked = req.user && quest
+                    .likes
+                    .findIndex(x => x.equals(req.user._id)) >= 0;
             res.json({quest});
         });
 };

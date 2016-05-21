@@ -16,7 +16,8 @@ export class Quest extends React.Component {
             comments: params.comments,
             photo: params.photo,
             likes: params.likes,
-            url: params.url
+            url: params.url,
+            isLiked: params.isLiked
         };
     }
 
@@ -36,9 +37,9 @@ export class Quest extends React.Component {
         fetch('/users/getCurrentState?questId=' + quest._id, {
             method: 'get',
             credentials: 'same-origin'
-        }).then(function(response) {
+        }).then(function (response) {
             return response.json();
-        }).then(function(text) {
+        }).then(function (text) {
             done(null, text);
         }).catch(err => {
             done(err);
@@ -60,27 +61,29 @@ export class Quest extends React.Component {
         fetch('/users/startQuest', {
             method: 'post',
             headers: {
-               'Accept': 'application/json',
-               'Content-Type': 'application/json'
-           },
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             credentials: 'same-origin',
             body: JSON.stringify({questId: this.state._id})
-        }).then(function(response) {
+        }).then(function (response) {
             console.log(response);
             return response;
-        }).then(function(text) {
+        }).then(function (text) {
             done(null, text);
         }).catch(err => {
             done(err);
         });
 
     }
+
     componentWillMount() {
         var done = ((err, data) => {
             if (err) {
                 console.log(err);
             } else {
                 this.getRoles(data.quest, () => {
+                    data.quest.author = data.quest.author.username;
                     this.setState(data.quest);
                 });
             }
@@ -93,7 +96,7 @@ export class Quest extends React.Component {
             credentials: 'same-origin'
         }).then(function (response) {
             return response.json();
-        }).then(function(text) {
+        }).then(function (text) {
             done(null, text);
         }).catch(err => {
             done(err);
@@ -102,7 +105,9 @@ export class Quest extends React.Component {
 
     edit() {
         ReactDOM.render(
-            <QuestEdit url={this.state.url}/>, document.getElementById('quest-info'));
+            <QuestEdit url={this.state.url}/>,
+            document.getElementById('quest-info')
+        );
     }
 
     deleteQuest() {
@@ -113,49 +118,78 @@ export class Quest extends React.Component {
         location.assign('/quests');
     }
 
+    handleLike() {
+        const id = this.state._id;
+        const likeIcon = this.refs.likeIcon;
+        const likesCount = this.refs.likesCount;
+        const isLiked = this.state.isLiked;
+        var newState = this.state;
+        newState.isLiked = !newState.isLiked;
+        const likedHeartClass = 'fa-heart';
+        const dislikedHeartClass = 'fa-heart-o';
+        const url = `/quests/${id}/likes`;
+        const self = this;
+        fetch(url, {
+            method: (isLiked ? 'delete' : 'post'),
+            credentials: 'same-origin'
+        })
+            .then((data) => {
+                if (data.status === 401) {
+                    location.assign('/signin');
+                } else if (!isLiked && data.status === 201) {
+                    likeIcon.classList.add(likedHeartClass);
+                    likeIcon.classList.remove(dislikedHeartClass);
+                    likesCount.innerText = parseInt(likesCount.innerText, 10) + 1;
+                    newState.isLiked = true;
+                    self.setState(newState);
+                } else if (isLiked && data.status === 200) {
+                    likeIcon.classList.add(dislikedHeartClass);
+                    likeIcon.classList.remove(likedHeartClass);
+                    likesCount.innerText = parseInt(likesCount.innerText, 10) - 1;
+                    newState.isLiked = false;
+                    self.setState(newState);
+                }
+            })
+    }
+
     render() {
-        var likesAmount;
         if (!this.state._id) {
             return null;
         }
-        if (!this.state.likes) {
-            likesAmount = 0;
-        } else {
-            likesAmount = this.state.likes.length
-        }
+
         var photos = this.state.photo
             ? this.state.photo.map((photo) => {
-                var photoElement;
-                if (this.state.photosStatus && !this.state.photosStatus[photo._id] &&
-                    this.state.userRole === 'user' && this.state.questStatus === 'started') {
-                    return (
-                        <div className="photo-list" key={photo._id}>
-                            <img src={photo.link}/>
-                            <div className="photo__description">
-                                {photo.description}
-                            </div>
-                            <input type="button" value="Сдать"/>
+            if (this.state.photosStatus && !this.state.photosStatus[photo._id] &&
+                this.state.userRole === 'user' && this.state.questStatus === 'started') {
+                return (
+                    <div className="photo-list" key={photo._id}>
+                        <img src={photo.link}/>
+                        <div className="photo__description">
+                            {photo.description}
                         </div>
-                    )
-                } else {
-                    return (
-                        <div className="photo-list" key={photo._id}>
-                            <img src={photo.link}/>
-                            <div className="photo__description">
-                                {photo.description}
-                            </div>
+                        <input type="button" value="Сдать"/>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className="photo-list" key={photo._id}>
+                        <img src={photo.link}/>
+                        <div className="photo__description">
+                            {photo.description}
                         </div>
-                    )
-                }
-                {photoElement}
-            })
+                    </div>
+                )
+            }
+        })
             : '';
 
         var buttonsBlock = this.state.userRole === 'admin' || this.state.questStatus === 'author'
             ? <div className="buttons">
-                    <input className="quest-form__edit-button" type="button" value="Редактировать" onClick={this.edit.bind(this)}/>
-                    <input className="quest-form__delete-button" type="button" value="Удалить" onClick={this.deleteQuest.bind(this)}/>
-                </div>
+            <input className="quest-form__edit-button" type="button" value="Редактировать"
+                   onClick={this.edit.bind(this)}/>
+            <input className="quest-form__delete-button" type="button" value="Удалить"
+                   onClick={this.deleteQuest.bind(this)}/>
+        </div>
             : '';
         var startButton = this.state.questStatus === 'notStarted' && this.state.userRole === 'user'
             ? (<input className="" type="button" value="Начать квест" onClick={this.startQuest.bind(this)}/>)
@@ -165,10 +199,16 @@ export class Quest extends React.Component {
                 <div className="quest-info__name">
                     {this.state.name}
                 </div>
-                <div className="quest-info__likes">
-                    {likesAmount}
-                    ♥
-                </div>
+                <span className="quest-list__post-like" onClick={this.handleLike.bind(this)}>
+                    <span className="quest-list__like">
+                        <i ref="likeIcon"
+                           className={"fa " + (this.state.isLiked ? "fa-heart" : "fa-heart-o")}
+                           aria-hidden="true"></i>
+                        <span ref="likesCount"
+                              className="quest-list__like-count">{this.state.likes.length}
+                        </span>
+                    </span>
+                </span>
                 <div className="quest-info__author">
                     {this.state.author}
                 </div>
@@ -196,7 +236,7 @@ export class Quest extends React.Component {
 
 export function render(url) {
     ReactDOM.render(
-        <Quest url={url} />,
+        <Quest url={url}/>,
         document.getElementById('quest-info')
     );
 }
