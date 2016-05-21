@@ -36,6 +36,9 @@ export class Quest extends React.Component {
         });
         fetch('/users/getCurrentState?questId=' + quest._id, {
             method: 'get',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
             credentials: 'same-origin'
         }).then(function (response) {
             return response.json();
@@ -66,8 +69,7 @@ export class Quest extends React.Component {
             },
             credentials: 'same-origin',
             body: JSON.stringify({questId: this.state._id})
-        }).then(function (response) {
-            console.log(response);
+        }).then(function(response) {
             return response;
         }).then(function (text) {
             done(null, text);
@@ -83,7 +85,6 @@ export class Quest extends React.Component {
                 console.log(err);
             } else {
                 this.getRoles(data.quest, () => {
-                    data.quest.author = data.quest.author.username;
                     this.setState(data.quest);
                 });
             }
@@ -105,7 +106,7 @@ export class Quest extends React.Component {
 
     edit() {
         ReactDOM.render(
-            <QuestEdit url={this.state.url}/>,
+            <QuestEdit {...this.state}/>,
             document.getElementById('quest-info')
         );
     }
@@ -194,6 +195,7 @@ export class Quest extends React.Component {
         var startButton = this.state.questStatus === 'notStarted' && this.state.userRole === 'user'
             ? (<input className="" type="button" value="Начать квест" onClick={this.startQuest.bind(this)}/>)
             : '';
+        var authorLink = '/users/' + this.state.author._id + '/profile';
         return (
             <div className="quest-info">
                 <div className="quest-info__name">
@@ -210,7 +212,7 @@ export class Quest extends React.Component {
                     </span>
                 </span>
                 <div className="quest-info__author">
-                    {this.state.author}
+                    <a href={authorLink}>{this.state.author.username}</a>
                 </div>
                 <div className="quest-info__city">
                     {this.state.city}
@@ -228,7 +230,7 @@ export class Quest extends React.Component {
                 </div>
                 {buttonsBlock}
                 {startButton}
-                <CommentList comments={this.state.comments} id={this.state._id} key={this.state.url}/>
+                <CommentList comments={this.state.comments} id={this.state._id} key={this.state._id}/>
             </div>
         );
     }

@@ -9,7 +9,7 @@ export default class QuestEdit extends React.Component {
     constructor(params) {
         super(params);
         this.state = {
-            id: params.id,
+            _id: params._id,
             name: params.name,
             author: params.author,
             description: params.description,
@@ -68,6 +68,7 @@ export default class QuestEdit extends React.Component {
     }
 
     render() {
+        console.log(this.state);
         return (
             <div className="quest-form">
                 <input className="quest-form__name" type="text"
@@ -76,7 +77,7 @@ export default class QuestEdit extends React.Component {
                        value={this.state.city || ''} onChange={this.change.bind(this, 'city')}/>
                 <input className="quest-form__description" type="text"
                        value={this.state.description || ''} onChange={this.change.bind(this, 'description')} />
-                <PhotoListEdit photos={this.state.photos} />
+                <PhotoListEdit photos={this.state.photos} questId={this.state._id}/>
                 <input className="quest-form__save-button" type="button" value="Сохранить" onClick={this.save.bind(this)}/>
             </div>
         );
