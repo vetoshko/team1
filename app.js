@@ -20,9 +20,11 @@ var questRoutes = require('./routes/quests');
 var questCreationRoutes = require('./routes/quest-creation');
 var commentRoutes = require('./routes/comments');
 var likeRoutes = require('./routes/likes');
+var notificationRoutes = require('./routes/notification');
 
 //middlewares
 var authMiddlewares = require('./middlewares/auth.js');
+var showNotificationMiddleware = require('./middlewares/showNotification.js');
 
 var secretKey = require('config').get('secretKey');
 
@@ -56,6 +58,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(authMiddlewares.setUserRole);
+app.use(showNotificationMiddleware);
 
 app.use(function (req, res, next) {
     res.locals.user = req.user;
@@ -71,6 +74,7 @@ app.use('/', likeRoutes);
 app.use('/quests/new-quest', questCreationRoutes);
 app.use('/quests/search', searchRoute);
 app.use('/quests', questRoutes);
+app.use('/notification', notificationRoutes);
 
 require('./controllers/auth/auth-config');
 // catch 404 and forward to error handler

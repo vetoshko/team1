@@ -58,7 +58,7 @@ describe('Auth tests', function () {
                 password: 'typicalPassword'
             })
             .expect(302)
-            .expect('Location', '/')
+            .expect('Location', '/notification')
             .end((err) => {
                 expect(err).to.not.exist;
                 User.findOne({
