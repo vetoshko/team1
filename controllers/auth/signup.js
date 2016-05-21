@@ -27,9 +27,9 @@ module.exports.post = function (req, res) {
             };
             mailSender.sendVerificationMail(message, function (err) {
                 if (err) {
-                    console.error(err);
+                    return res.showNotification('Ошибка при отправке почты');
                 }
-                res.redirect('/');
+                return res.showNotification('Письмо с подтверждением отправлено на почту');
             });
         });
 };
