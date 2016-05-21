@@ -1,12 +1,93 @@
 .comment-info
-    background-color #aaa
+    margin 35px 0
 
-.comment-info__author
-    text-align left
+    &__author
+        padding-top 10px
 
+    &__author a,
+    &__author a:hover,
+    &__author a:active
+        font 600 15px 'Graphik Web', Helvetica, Arial, sans-serif
+        line-height 1.2
+        color #303133
+        outline 0
+        border 0
+        text-decoration none
 
-.comment-info__date
-    text-align right
+    &__author a:hover
+        color #1080d0
 
-.comment__text
-    background-color #ddd
+    &__container
+        padding-left 0
+
+    &__container li
+        list-style none
+        border-color #eaeaea
+        margin 18px 0
+        border 0
+        border-top-width 1px
+        border-style solid
+        box-sizing content-box
+        color rgba(0, 0, 0, .15)
+
+    &__date
+        font-size 12px
+        margin-top 9px
+        color #777
+        font-weight 300
+
+.comment
+    &__text
+        font 300 15px 'Graphik Web', Helvetica, Arial, sans-serif
+        margin-top 9px
+        line-height 1.75
+        color #777
+
+    &__edit,
+    &__delete-button
+        border none
+        cursor pointer
+        background none
+        font-size 1em
+        color #8e8d8d
+        outline none
+
+    &__edit:hover,
+    &__delete-button:hover
+        color #303133
+
+    &__edit-area
+        text-align right
+
+    &__edit-input
+        display block
+        width 100%
+        font 300 15px 'Graphik Web', Helvetica, Arial, sans-serif
+        margin-top 9px
+        line-height 1.75
+        color #777
+        box-sizing border-box
+        outline none
+        padding 15px 20px
+        border-radius 3px
+        border 1px solid #cfcece
+        -moz-box-sizing border-box
+        -webkit-box-sizing border-box
+        resize none
+        -webkit-appearance none
+
+    &__edit-button
+        margin 0
+        font 400 .68em 'Graphik Web', Helvetica, Arial, sans-serif
+        text-transform uppercase
+        letter-spacing 1px
+        line-height 45px
+        color #fff
+        background-color #fe7877
+        outline none
+        border none
+        border-radius 3px
+        cursor pointer
+        padding 0 20px
+        margin-top 10px
+        height 45px

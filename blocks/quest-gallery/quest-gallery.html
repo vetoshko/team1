@@ -1,9 +1,0 @@
-{% include "../../blocks/quest-description/quest-description.html" %}
-<section class="quest-gallery">
-    {% for photo in photos %}
-    <div class="quest-gallery__preview">
-        <a class="quest-gallery__link"
-           href=""><img class="quest-gallery__preview-photo" src="{{ photo.link }}"></a>
-    </div>
-    {% endfor %}
-</section>

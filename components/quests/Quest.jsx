@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CommentList from "../comments/CommentList.jsx";
 import QuestEdit from "./QuestEdit.jsx";
+import moment from 'moment';
+import 'moment/locale/ru';
 import 'whatwg-fetch';
 
 export class Quest extends React.Component {
@@ -11,6 +13,7 @@ export class Quest extends React.Component {
             _id: params._id,
             name: params.name,
             author: params.author,
+            date: params.date,
             description: params.description,
             city: params.city,
             comments: params.comments,
@@ -36,9 +39,6 @@ export class Quest extends React.Component {
         });
         fetch('/users/getCurrentState?questId=' + quest._id, {
             method: 'get',
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            }),
             credentials: 'same-origin'
         }).then(function (response) {
             return response.json();
@@ -69,7 +69,8 @@ export class Quest extends React.Component {
             },
             credentials: 'same-origin',
             body: JSON.stringify({questId: this.state._id})
-        }).then(function(response) {
+        }).then(function (response) {
+            console.log(response);
             return response;
         }).then(function (text) {
             done(null, text);
@@ -85,6 +86,7 @@ export class Quest extends React.Component {
                 console.log(err);
             } else {
                 this.getRoles(data.quest, () => {
+                    data.quest.author = data.quest.author.username;
                     this.setState(data.quest);
                 });
             }
@@ -106,7 +108,7 @@ export class Quest extends React.Component {
 
     edit() {
         ReactDOM.render(
-            <QuestEdit {...this.state}/>,
+            <QuestEdit url={this.state.url}/>,
             document.getElementById('quest-info')
         );
     }
@@ -164,73 +166,90 @@ export class Quest extends React.Component {
                 this.state.userRole === 'user' && this.state.questStatus === 'started') {
                 return (
                     <div className="photo-list" key={photo._id}>
-                        <img src={photo.link}/>
-                        <div className="photo__description">
-                            {photo.description}
+                        <div className="photo-list__item" key={photo._id}>
+                            <div className="photo-list__content">
+                                <img src={photo.link}/>
+                                <div className="photo-list__photo-description">
+                                    {photo.description}
+                                </div>
+                            </div>
                         </div>
                         <input type="button" value="Сдать"/>
                     </div>
                 )
             } else {
                 return (
-                    <div className="photo-list" key={photo._id}>
-                        <img src={photo.link}/>
-                        <div className="photo__description">
-                            {photo.description}
+                    <div className="photo-list__item" key={photo._id}>
+                        <div className="photo-list__content">
+                            <img src={photo.link}/>
+                            <div className="photo-list__photo-description">
+                                {photo.description}
+                            </div>
                         </div>
                     </div>
                 )
             }
-        })
-            : '';
+        }) : '';
 
         var buttonsBlock = this.state.userRole === 'admin' || this.state.questStatus === 'author'
-            ? <div className="buttons">
-            <input className="quest-form__edit-button" type="button" value="Редактировать"
-                   onClick={this.edit.bind(this)}/>
-            <input className="quest-form__delete-button" type="button" value="Удалить"
-                   onClick={this.deleteQuest.bind(this)}/>
-        </div>
-            : '';
+            ? <div className="quest-form__container">
+            <button className="quest-form__edit-button" onClick={this.edit.bind(this)}>
+                <i className="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button className="quest-form__delete-button"
+                    onClick={this.deleteQuest.bind(this)}>
+                <i className="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+        </div> : '';
         var startButton = this.state.questStatus === 'notStarted' && this.state.userRole === 'user'
-            ? (<input className="" type="button" value="Начать квест" onClick={this.startQuest.bind(this)}/>)
+            ? (<input className="" type="button" value="Начать квест"
+                      onClick={this.startQuest.bind(this)}/>)
             : '';
-        var authorLink = '/users/' + this.state.author._id + '/profile';
         return (
             <div className="quest-info">
-                <div className="quest-info__name">
+                {buttonsBlock}
+                <h1 className="quest-info__name">
                     {this.state.name}
-                </div>
-                <span className="quest-list__post-like" onClick={this.handleLike.bind(this)}>
-                    <span className="quest-list__like">
-                        <i ref="likeIcon"
-                           className={"fa " + (this.state.isLiked ? "fa-heart" : "fa-heart-o")}
-                           aria-hidden="true"></i>
-                        <span ref="likesCount"
-                              className="quest-list__like-count">{this.state.likes.length}
-                        </span>
-                    </span>
-                </span>
-                <div className="quest-info__author">
-                    <a href={authorLink}>{this.state.author.username}</a>
-                </div>
-                <div className="quest-info__city">
-                    {this.state.city}
+                </h1>
+                <div className="quest-info__meta-inf-wrap">
+                    <div className="quest-info__date">
+                        {moment(this.state.date).format('MMMM DD, YYYY')}
+                    </div>
+                    <div className="quest-info__author">
+                        <span>|</span>
+                        <a href="#" className="quest-info__link">{this.state.author.username}</a>
+                    </div>
+                    <div className="quest-info__city">
+                        <span>|</span>
+                        {this.state.city}
+                    </div>
                 </div>
                 <div className="quest-info__description">
                     {this.state.description}
                 </div>
+
                 <div className="photo-list">
-                    <div className="photo-list__header">
-                        Фотографии:
-                    </div>
                     <ul>
                         {photos}
                     </ul>
                 </div>
-                {buttonsBlock}
+
+                <div className="quest-info__bottom-meta-inf-wrap">
+                        <span className="quest-info__post-like"
+                              onClick={this.handleLike.bind(this)}>
+                    <span className="quest-info__like">
+                        <i ref="likeIcon"
+                           className={"fa " + (this.state.isLiked ? "fa-heart" : "fa-heart-o")}
+                           aria-hidden="true"></i>
+                        <span ref="likesCount"
+                              className="quest-info__like-count">{this.state.likes.length}
+                        </span>
+                    </span>
+                </span>
+                </div>
                 {startButton}
-                <CommentList comments={this.state.comments} id={this.state._id} key={this.state._id}/>
+                <CommentList comments={this.state.comments} id={this.state._id}
+                             key={this.state.url}/>
             </div>
         );
     }

@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment';
+import 'moment/locale/ru';
 
 export default class Comment extends React.Component {
     constructor(params) {
@@ -74,33 +76,43 @@ export default class Comment extends React.Component {
     }
 
     render() {
-        console.log(this.state.author);
         if (this.state.deleted) {
             return null;
         }
+
         var editMode = this.state.editMode ?
-            <div className="comment__edit-input">
-                <input className="comment__edit-input" type="text" value={this.state.newText} onChange={this.editComment.bind(this)}/>
-                <input className="comment__edit-button" type="button" value="Редактировать" onClick={this.saveComment.bind(this)}/>
+            <div className="comment__edit-input-container">
+                <textarea className="comment__edit-input" type="text" value={this.state.newText}
+                       onChange={this.editComment.bind(this)}/>
+                <input className="comment__edit-button" type="button" value="Сохранить"
+                       onClick={this.saveComment.bind(this)}/>
             </div> :
-            <input className="comment__edit" type="button" value="Редактировать" onClick={this.startEditing.bind(this)}/>;
+            <button className="comment__edit" title="Редактировать"
+                    onClick={this.startEditing.bind(this)}>
+                <i className="fa fa-pencil" aria-hidden="true"></i></button>;
+
         var editArea = this.state.author == this.props.currentUserId ?
             <div className="comment__edit-area">
                 {editMode}
-                <input className="comment__delete-button" type="button" value="Удалить" onClick={this.deleteComment.bind(this)}/>
+                <button className="comment__delete-button" title="Удалить"
+                        onClick={this.deleteComment.bind(this)}
+                        style={this.state.editMode ? {display: 'none'} : {display: 'inline'}}>
+                    <i className="fa fa-trash-o" aria-hidden="true"></i></button>
             </div> : "";
         var authorLink = '/users/' + this.state.author + '/profile';
+
         return (
             <li>
                 <div className="comment-info">
                     <div className="comment-info__author">
-                        <a href={authorLink}>{this.state.username}</a>
+                        <a href="{authorLink}" className="comment-info__link">{this.state.username}</a>
                     </div>
                     <div className="comment-info__date">
-                        {this.state.date}
+                        {moment(this.state.date).format('MMMM DD YYYY, h:mm:ss')}
                     </div>
                 </div>
-                <div className="comment__text">
+                <div className="comment__text"
+                     style={this.state.editMode ? {display: 'none'} : {display: 'block'}}>
                     {this.state.text}
                 </div>
                 {editArea}

@@ -118,11 +118,11 @@ export default class QuestList extends React.Component {
 
         return (
             <ul className='quest-list'>
-                <div className="quest-list__empty-list-massage"
+                <div className="quest-list__empty-list-message"
                      style={emptyBD.call(this) ? {display : 'block'} : {display : 'none'}}>
                     Список квестов пуст. <a href="/newQuest">Создайте</a> первый квест!
                 </div>
-                <div className="quest-list__empty-list-massage"
+                <div className="quest-list__empty-list-message"
                      style={noSearchResults.call(this) ? {display : 'block'} : {display : 'none'}}>
                     Ничего не найдено.
                 </div>
