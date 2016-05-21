@@ -16,7 +16,7 @@ module.exports = {
         signin: './signin/signin.js',
         quest: './quest/quest.js',
         quests: './quests/quests.js',
-        'new-quest': './new-quest/new-quest.js',
+        newQuest: './new-quest/new-quest.js',
         notification: './notification/notification.js'
     },
 
