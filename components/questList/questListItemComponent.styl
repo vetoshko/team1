@@ -1,102 +1,92 @@
 .quest-list
-  &__item
-    box-shadow 0 0 8px -1px rgba(84,84,84,.25)
-    list-style-type: none
-    margin-bottom: 20px
-    padding: 10px 20px 20px
-    background-color: #fff
-    border-radius: 3px
-    font: 400 1em 'Graphik Web', Helvetica, Arial, sans-serif
-    color: #414a51
-    display: flex
-    flex-flow: row wrap;
+    &__item
+        display inline-block
+        font 400 1em 'Graphik Web', Helvetica, Arial, sans-serif
+        background-color #fff
+        box-shadow 0 5px 15px rgba(0, 0, 0, 0.05)
+        list-style-type none
+        border-radius 3px
+        margin-bottom 40px
+        width 100%
 
-  &__image-container
-    margin: 0 20px 10px 0;
+    &__entry
+        margin 40px
 
-  &__image,
-  &__date
-    width: 250px
-    flex-shrink: 0
+    &__name
+        margin 0
 
-  &__field-name
-    display: block
-    line-height: 1.2
-    color: #4e5e6a
-    font-size: 1.5em
-    width: 100%
-    margin 15px 0 10px
+    &__name a,
+    &__name a:hover,
+    &__name a:active
+        font-weight 600
+        font-size 17px
+        color #303133
 
-  &__main,
-  &__more
-    display: flex
-    justify-content: space-between
+    &__name a,
+    &__name a:hover,
+    &__name a:active
+    &__author a,
+    &__author a:hover,
+    &__author a:active
+        outline 0
+        border 0
+        text-decoration none
 
-  &__more
-    margin-top: 10px
-    width: 100%
+    &__name a:hover,
+    &__author a:hover
+        color #1080d0
 
-  &__likes
-    display: flex
-    align-items: center
-    cursor: pointer
-    padding: 4px 6px
+    &__date-container,
+    &__author,
+    &__author a
+        margin 0
+        color #8e8d8d
+        font-size 11px
+        font-weight 600
+        line-height 1.75
 
-  &__likes:hover
-    background-color: #eee
-    border-radius: 3px
-
-  &__like-icon,
-  &__date-icon
-    display: inline-block
-
-  &__like-count
-    display: inline-block
-    font: 400 .9em 'Graphik Web', Helvetica, Arial, sans-serif
-
-  &__description
-    flex-grow: 1
-    justify-content: flex-end
-
-  &__date
-    font: 400 13px 'Graphik Web', Helvetica, Arial, sans-serif
-    color: #bbb
-
-  &__author
-    padding: 0 0 1.5em
-    line-height: 1.5
-    color: #9DA8B0;
-    font-size: 0.75em
-    font-weight: bold
-    width 100%
-
-@media all and (max-width: 800px)
-  .quest-list
-    &__main
-      flex-flow: column
+    &__author
+        margin 13px 0 0
 
     &__image
-      width: 100%
+        width 100%
 
-    &__image-container
-      margin-right: 0
+    &__image-container,
+    &__image
+        border-top-left-radius 3px
+        border-top-right-radius 3px
 
-a
-  text-decoration: none
-  outline: none
-  color: #4e5e6a
-  cursor: pointer
+    &__description
+        margin 13px 0 0
+        color #777
+        font-size 15px
+        font-weight 400
+        line-height 1.75
 
-a:hover
-  color: #2D3E4A
+    &__line
+        border-color #eaeaea
+        margin 18px 0
+        border 0
+        border-top-width 1px
+        border-style solid
+        box-sizing content-box
+        height 0
+        color rgba(0, 0, 0, .15)
 
+    &__bottom-meta-inf-wrap
+        text-align right
+
+    &__post-like
+        cursor pointer
+        font-size 15px
+
+    &__post-like:hover
+        color #1080d0
+
+.fa-calendar-o,
+.fa-user,
+.fa-heart,
 .fa-heart-o
-  font-size: 1.3em
-  margin-left: 7px
+    margin-right 6px
 
-.fa-calendar-o
-  margin-right 5px;
 
-.fa-user
-  color: #4e5e6a
-  margin-right 5px

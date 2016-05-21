@@ -20,12 +20,31 @@ var getAll = function (callback) {
     });
 };
 
+var search = function (callback) {
+    fetch('/quests/search', {
+        method: 'post',
+        body: JSON.stringify({
+            search: document.getElementById('search').value
+        }),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(function (response) {
+        return response.json();
+    }).then(function (jsonResponse) {
+        callback(null, jsonResponse.hits);
+    }).catch(err => {
+        callback(err);
+    });
+};
+
 export default class QuestList extends React.Component {
 
     constructor(params) {
         super(params);
         this.state = {
-            quests: []
+            quests: [],
+            search: false
         };
     }
 
@@ -36,6 +55,35 @@ export default class QuestList extends React.Component {
                 return;
             }
             this.setState({quests: this.orderQuests(data)});
+        });
+        document.getElementById('search-form').addEventListener('submit', this.onSubmit.bind(this))
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        if (this.state.search) {
+            getAll((err, data) => {
+                if (err) {
+                    console.log('Quests load error :' + err);
+                    return;
+                }
+                this.setState({quests: data});
+            });
+        }
+        search((err, data) => {
+            if (err) {
+                console.log('Quests load error :' + err);
+                return;
+            }
+            var arr = data.filter(function (item) {
+                return item !== null;
+            }).map(function (item) {
+                return item._id;
+            });
+            var newData = this.state.quests.filter(function (item) {
+                return ~arr.indexOf(item._id);
+            });
+            this.setState({quests: this.orderQuests(newData), search: true});
         });
     }
 
@@ -56,23 +104,29 @@ export default class QuestList extends React.Component {
                                     quest={quest}
                                     link={quest.photo[0].link}
                                     likes={quest.likes}
-                                    date={moment(quest.date).format('MMMM DD, YYYY')}
-                                    checkin={this.props.checkin}
-                                    own={this.props.own}/>
+                                    date={moment(quest.date).format('MMMM DD, YYYY')}/>
         );
 
+        var noSearchResults = function () {
+            return !this.state.quests.length && this.state.search;
+        };
+
+        var emptyBD = function () {
+            return !this.state.quests.length && !this.state.search;
+        };
+
         return (
-            <div className="quest-list">
-                {this.props.checkin ? <h1 className="quest-list__title">
-                    начатые и пройденные квесты
-                </h1> : null}
-                {this.props.own ? <h1 className="quest-list__title">
-                    созданные квесты
-                </h1> : null}
-                <ul className='quest-list__list'>
-                    {questNodes}
-                </ul>
-            </div>
+            <ul className='quest-list'>
+                <div className="quest-list__empty-list-massage"
+                     style={emptyBD.call(this) ? {display : 'block'} : {display : 'none'}}>
+                    Список квестов пуст. <a href="/newQuest">Создайте</a> первый квест!
+                </div>
+                <div className="quest-list__empty-list-massage"
+                     style={noSearchResults.call(this) ? {display : 'block'} : {display : 'none'}}>
+                    Ничего не найдено.
+                </div>
+                {questNodes}
+            </ul>
         );
     }
 }

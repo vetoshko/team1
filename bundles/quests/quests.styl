@@ -1,22 +1,30 @@
-@import '../../blocks/header/header.styl';
-@import '../../blocks/search-form/search-form.styl';
-@import '../../components/questList/questList.styl';
-@import '../../components/questList/questListItemComponent.styl';
+@import '../../blocks/header/header.styl'
+@import '../../blocks/footer/footer.styl'
+@import '../../blocks/search-form/search-form.styl'
+@import '../../components/questList/questList.styl'
+@import '../../components/questList/questListItemComponent.styl'
 
 html,
 body
-  padding 0
-  margin 0
-  height 100%
-  width 100%
-  display flex
-  flex-flow: row wrap;
+    padding 0
+    margin 0
+    width 100%
+    min-height 100vh
+    display flex
+    flex-direction column
 
-.header
-  flex: 1 100%;
+.search-section
+    display flex
+    justify-content center
+    align-items center
+    background-color #f7f7f7
+    flex: 1 0 auto
 
-.main
-  display flex
-  flex: 1 100%;
-  justify-content center
-  flex-flow: row wrap;
+.quest-section
+    flex: 1 0 auto
+    display flex
+    justify-content center
+    background-color #f7f7f7
+
+section *
+    box-sizing border-box !important
