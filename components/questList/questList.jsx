@@ -10,7 +10,8 @@ var getAll = function (callback) {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
-        })
+        }),
+        credentials: 'same-origin'
     }).then(function (response) {
         return response.json();
     }).then(function (jsonResponse) {
