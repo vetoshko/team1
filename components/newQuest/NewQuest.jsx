@@ -29,7 +29,6 @@ export default class NewQuest extends React.Component {
         }).then(response => {
             return response.json();
         }).then(photosData => {
-            console.log(photosData);
             this.setState({photosData});
 
             var allStagesComponents = photosData.map((photoData, index) => <NewPhotoBlock
