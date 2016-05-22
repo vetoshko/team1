@@ -38,20 +38,21 @@ export default class UserEdit extends React.Component {
     render() {
         return (
             <div className="user-info__container">
-                    <div className="user-info__login">
-                        <label className="user-info__label">Логин:
+                <h4 className="user-info__header">Редактирование профиля</h4>
+                <div className="user-info__login">
+                        <label className="user-info__label">Логин
                             <input type="text" className="user-info__data-edit" name="username"
                                    value={this.state.username} onChange={this.change.bind(this, 'username')}/>
                         </label>
                     </div>
                     <div className="user-info__phone">
-                        <label className="user-info__label">Телефон:
+                        <label className="user-info__label">Телефон
                             <input className="user-info__data-edit" name="phone" type="tel"
                                    value={this.state.phone} onChange={this.change.bind(this, 'phone')}/>
                         </label>
                     </div>
                     <div className="user-info__email">
-                        <label className="user-info__label">Email:
+                        <label className="user-info__label">Email
                             <input className="user-info__data-edit" name="email" type="email"
                                    value={this.state.email} onChange={this.change.bind(this, 'email')}/>
                         </label>

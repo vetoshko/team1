@@ -4,7 +4,7 @@ import UserInfo from './UserInfoComponent.jsx';
 import UserEdit from './UserEditComponent.jsx';
 import ShortQuestList from './ShortQuestList.jsx';
 
-class User extends React.Component{
+class User extends React.Component {
     constructor(params) {
         super(params);
         this.state = {
@@ -46,26 +46,24 @@ class User extends React.Component{
         });
     }
 
-    render () {
+    render() {
         if (!this.state.user._id) {
             return null;
         }
 
-        console.log(this.state);
-
         var userBlock = this.state.mode == 'info' ? (
-            <UserInfo user={this.state.user} />
+            <UserInfo user={this.state.user}/>
         ) : (
-            <UserEdit user={this.state.user} />
+            <UserEdit user={this.state.user}/>
         );
 
         return (
             <article class="user-page">
                 {userBlock}
-                <span className="quests-label">Мои квесты:</span>
-                <ShortQuestList quests={this.state.user.ownedQuests} />
-                <span className="quests-label">Квесты, которые я проходил:</span>
-                <ShortQuestList quests={this.state.user.startedQuests} />
+                <span className="quests-label">Мои квесты</span>
+                <ShortQuestList quests={this.state.user.ownedQuests}/>
+                <span className="quests-label">Квесты, которые я проходил</span>
+                <ShortQuestList quests={this.state.user.startedQuests}/>
             </article>
         );
 

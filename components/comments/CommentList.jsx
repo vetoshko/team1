@@ -14,7 +14,7 @@ export default class CommentList extends React.Component {
     }
 
     addComment() {
-        fetch('/quests/'+this.props.id +'/comments', {
+        fetch('/quests/' + this.props.id + '/comments', {
             method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ export default class CommentList extends React.Component {
         this.setState({newComment: element.target.value});
     }
 
-    componentWillMount () {
+    componentWillMount() {
         var done = ((err, data) => {
             if (!err && data.user) {
                 this.setState({currentUserId: data.user._id});
@@ -68,14 +68,18 @@ export default class CommentList extends React.Component {
             (comment) => <Comment {...comment} questId={this.props.id} currentUserId={this.state.currentUserId} key={comment._id} />) : '';
         return this.state.authorized ? (
             <div className="comment-list">
-                <div className="comment-list__header">
-                    Комментарии:
-                </div>
-                <ul>
+                <hr className="comment-list__line"/>
+                <h5 className="comment-list__header">Комментарии</h5>
+                <ul className="comment-info__container">
                     {commentNodes}
                 </ul>
-                <input className="comment-list__text-field" type="text" placeholder="Ваш комментарий" value={this.state.newComment} onChange={this.change.bind(this)}/>
-                <input className="comment-list__add-button" type="button" value="Добавить" onClick={this.addComment.bind(this)}/>
+                <div className="comment-list__container">
+                    <textarea className="comment-list__text-field" type="text"
+                              placeholder="Ваш комментарий" value={this.state.newComment}
+                              onChange={this.change.bind(this)}/>
+                    <input className="comment-list__add-button" type="button" value="Добавить"
+                           onClick={this.addComment.bind(this)}/>
+                </div>
             </div>
         ) : null;
     }

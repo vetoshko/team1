@@ -71,11 +71,14 @@ export default class QuestEdit extends React.Component {
         console.log(this.state);
         return (
             <div className="quest-form">
+                Название
                 <input className="quest-form__name" type="text"
                        value={this.state.name || ''} onChange={this.change.bind(this, 'name')}/>
+                Город
                 <input className="quest-form__city" type="text"
                        value={this.state.city || ''} onChange={this.change.bind(this, 'city')}/>
-                <input className="quest-form__description" type="text"
+                Описание
+                <textarea className="quest-form__description" type="text"
                        value={this.state.description || ''} onChange={this.change.bind(this, 'description')} />
                 <PhotoListEdit photos={this.state.photos} questId={this.state._id}/>
                 <input className="quest-form__save-button" type="button" value="Сохранить" onClick={this.save.bind(this)}/>

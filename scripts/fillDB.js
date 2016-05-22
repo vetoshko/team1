@@ -45,7 +45,7 @@ function fillQuests(usersId, callback) {
             text: faker.hacker.phrase()
         })],
         date: faker.date.past(),
-        photo: new Photo({
+        photo: [new Photo({
             checkIn: users,
             link: faker.image.imageUrl(),
             description: faker.hacker.phrase(),
@@ -60,6 +60,216 @@ function fillQuests(usersId, callback) {
                 text: faker.hacker.phrase()
             })]
         }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            }),
+            new Photo({
+                checkIn: users,
+                link: faker.image.imageUrl(),
+                description: faker.hacker.phrase(),
+                hint: faker.hacker.phrase(),
+                location: new Location({
+                    lat: faker.address.latitude(),
+                    lon: faker.address.longitude()
+                }),
+                comments: [new Comment({
+                    author: usersId[Math.floor(Math.random() * peopleCount)],
+                    date: Date.now,
+                    text: faker.hacker.phrase()
+                })]
+            })],
         likes: usersId.slice(0, Math.floor(Math.random() * peopleCount / 5))
     }).save((err, quest) => {
         if (err) {

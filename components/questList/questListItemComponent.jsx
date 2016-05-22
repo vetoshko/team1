@@ -53,11 +53,14 @@ export default class QuestListItemComponent extends React.Component {
                         <i className="fa fa-calendar-o" aria-hidden="true"></i>
                         <time className="quest-list__date">{this.props.date}</time>
                     </div>
+                    <div className="quest-list__city-container">
+                        <i className="fa fa-map-marker" aria-hidden="true"></i>
+                        <span className="quest-list__city">{this.props.quest.city}</span>
+                    </div>
                     <div className="quest-list__description">
                         {this.props.quest.description}
                     </div>
                     <hr className="quest-list__line"/>
-
                     <div className="quest-list__bottom-meta-inf-wrap">
                         <span className="quest-list__post-like" onClick={this.likesHandle.bind(this)}>
                             <span className="quest-list__like">
