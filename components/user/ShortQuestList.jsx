@@ -1,5 +1,8 @@
 import React from 'react';
-import ShortQuestListItem from './ShortQuestListItemComponent.jsx';
+import QuestListItemComponent from "../questList/questListItemComponent.jsx";
+import moment from 'moment';
+import 'moment/locale/ru';
+
 
 export default class ShortQuestList extends React.Component {
     constructor(params) {
@@ -8,8 +11,8 @@ export default class ShortQuestList extends React.Component {
 
     render() {
         var quests = this.props.quests.map(quest => (
-            <ShortQuestListItem key={quest._id} id={quest._id} name={quest.name} link={quest.photo[0].link}
-                                description={quest.description} author={quest.author}/>
+            <QuestListItemComponent key={quest._id} id={quest._id} quest={quest} name={quest.name} link={quest.photo[0].link}
+                                likes={quest.likes} date={moment(quest.date).format('MMMM DD, YYYY')} description={quest.description} author={quest.author}/>
         ));
 
         return (
