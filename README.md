@@ -1,4 +1,4 @@
-# Фотоквест от команды №1
+# Фотоквест от команды №1 [![Build Status](https://api.travis-ci.org/urfu-2015/team1.svg?branch=master)](https://travis-ci.org/urfu-2015/team1)
 ## Как запускать
 
 1. `npm install`
