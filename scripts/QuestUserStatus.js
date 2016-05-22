@@ -4,15 +4,17 @@ var Quest = require('../models/quests.js').Quest;
 var Photo = require('../models/quests.js').Photo;
 
 function getQuest(questId, callback) {
-    Quest.findById(questId, (err, quest) => {
-        if (err) {
-            return callback(err);
-        }
-        if (!quest) {
-            return callback(new Error('Incorect questId: ' + questId));
-        }
-        callback(null, quest);
-    });
+    Quest.findById(questId)
+        .populate('author', 'username')
+        .exec((err, quest) => {
+            if (err) {
+                return callback(err);
+            }
+            if (!quest) {
+                return callback(new Error('Incorect questId: ' + questId));
+            }
+            callback(null, quest);
+        });
 }
 
 function isQuestCompleted(userId, quest) {
@@ -37,17 +39,14 @@ module.exports.getUserRole = (user, questId) => {
                 }
                 return resolve(isQuestCompleted(user._id, quest) ? 'completed' : 'started');
             });
-            return;
         } else {
-            return resolve('notStarted');
+            getQuest(questId, (err, quest) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(user._id.equals(quest.author._id) ? 'author' : 'notStarted');
+            });
         }
-
-        getQuest(questId, (err, quest) => {
-            if (err) {
-                return reject(err);
-            }
-            resolve(user._id.equals(quest.author._id) ? 'author' : 'none');
-        });
     });
 };
 

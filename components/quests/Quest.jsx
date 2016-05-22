@@ -4,6 +4,7 @@ import CommentList from "../comments/CommentList.jsx";
 import QuestEdit from "./QuestEdit.jsx";
 import moment from 'moment';
 import 'moment/locale/ru';
+import QuestPhoto from './QuestPhoto.jsx';
 import 'whatwg-fetch';
 
 export class Quest extends React.Component {
@@ -162,36 +163,17 @@ export class Quest extends React.Component {
 
         var photos = this.state.photo
             ? this.state.photo.map((photo) => {
-            if (this.state.photosStatus && !this.state.photosStatus[photo._id] &&
-                this.state.userRole === 'user' && this.state.questStatus === 'started') {
-                return (
-                    <div className="photo-list" key={photo._id}>
-                        <div className="photo-list__item" key={photo._id}>
-                            <div className="photo-list__content">
-                                <img src={photo.link}/>
-                                <div className="photo-list__photo-description">
-                                    {photo.description}
-                                </div>
-                                <div className="photo-list__helper">
-                                    <input className="photo-list__pass" type="button" value="Сдать"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )
-            } else {
-                return (
-                    <div className="photo-list__item" key={photo._id}>
-                        <div className="photo-list__content">
-                            <img src={photo.link}/>
-                            <div className="photo-list__photo-description">
-                                {photo.description}
-                            </div>
-                        </div>
-                    </div>
-                )
-            }
-        }) : '';
+            console.log(photo);
+            return <QuestPhoto
+                questId={this.state._id}
+                photosStatus={this.state.photosStatus}
+                userRole={this.state.userRole}
+                questStatus={this.state.questStatus}
+                photo={photo}
+                key={photo._id}
+            />
+        })
+            : '';
 
         var buttonsBlock = this.state.userRole === 'admin' || this.state.questStatus === 'author'
             ? <div className="quest-form__container">
