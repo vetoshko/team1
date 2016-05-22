@@ -96,13 +96,15 @@ export default class NewQuest extends React.Component {
                     </form>
                     <form name="photos-upload-form">
                         <input type="file" name="photo" id="photo" onChange={this.handleImageChange.bind(this)} required multiple />
-                        <input type="button" onClick={this.uploadPhotos.bind(this)} value="Загрузить" />
+                        <input type="button" className="new-quest__download" onClick={this.uploadPhotos.bind(this)} value="Загрузить" />
                     </form>
                 </div>
                 <div class="stages-list">
                     {this.state.allStagesComponents}
                 </div>
-                <input form="quest-form" type="button" onClick={this.uploadQuest.bind(this)} value="Создать квест"/>
+                <div className="helper">
+                    <input form="quest-form" type="button" className="create-button" onClick={this.uploadQuest.bind(this)} value="Создать квест"/>
+                </div>
             </div>);
 
     }

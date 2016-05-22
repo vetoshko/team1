@@ -37,7 +37,7 @@ export default class PhotoListEdit extends React.Component {
                     {photoNodes}
                 </ul>
                 <form onSubmit={this.addPhoto} encType="multipart/form-data">
-                    <input className="photo-add-button" type="file" value="" onChange={this.change.bind(this)}/>
+                    <input className="photo-add-form" type="file" value="" onChange={this.change.bind(this)}/>
                     <input className="photo-add-button" type="submit" value="Добавить" />
                 </form>
             </div>
