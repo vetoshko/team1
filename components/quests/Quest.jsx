@@ -172,9 +172,11 @@ export class Quest extends React.Component {
                                 <div className="photo-list__photo-description">
                                     {photo.description}
                                 </div>
+                                <div className="photo-list__helper">
+                                    <input className="photo-list__pass" type="button" value="Сдать"/>
+                                </div>
                             </div>
                         </div>
-                        <input type="button" value="Сдать"/>
                     </div>
                 )
             } else {
@@ -202,7 +204,7 @@ export class Quest extends React.Component {
             </button>
         </div> : '';
         var startButton = this.state.questStatus === 'notStarted' && this.state.userRole === 'user'
-            ? (<input className="" type="button" value="Начать квест"
+            ? (<input className="quest-info__start" type="button" value="Начать квест"
                       onClick={this.startQuest.bind(this)}/>)
             : '';
         return (
@@ -223,6 +225,8 @@ export class Quest extends React.Component {
                         <span>|</span>
                         {this.state.city}
                     </div>
+                    <br/>
+                    {startButton}
                 </div>
                 <div className="quest-info__description">
                     {this.state.description}
@@ -247,7 +251,6 @@ export class Quest extends React.Component {
                     </span>
                 </span>
                 </div>
-                {startButton}
                 <CommentList comments={this.state.comments} id={this.state._id}
                              key={this.state.url}/>
             </div>
