@@ -30,9 +30,39 @@ html,
 body
     padding 0
     margin 0
+    width 100%
+    min-height 100vh
+    display flex
+    flex-direction column
 
 body
     background-color #fff
 
-main
-    height 500px
+
+.container3
+    flex: 1 0 auto
+    display flex
+    justify-content center
+    background-color #f7f7f7
+    padding 40px
+
+.container1
+    margin 70px 50px
+
+.item
+    font 400 .9em 'Graphik Web', Helvetica, Arial, sans-serif
+    text-transform uppercase
+    letter-spacing 1px
+    line-height 25px
+
+.fa-camera
+    text-transform uppercase
+    letter-spacing 1px
+    line-height 45px
+    font-size 1em
+    color #8e8d8d
+    margin-right 15px
+
+@media screen and (max-width: 980px)
+    .container
+        margin 50px 20px

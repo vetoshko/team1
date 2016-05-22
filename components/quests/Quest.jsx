@@ -71,7 +71,6 @@ export class Quest extends React.Component {
             credentials: 'same-origin',
             body: JSON.stringify({questId: this.state._id})
         }).then(function (response) {
-            console.log(response);
             return response;
         }).then(function (text) {
             done(null, text);

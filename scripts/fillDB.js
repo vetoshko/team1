@@ -307,7 +307,17 @@ module.exports.fillDataBase = function (callback) {
             console.log('User added');
         }
     });
-
+    User.register(new User({
+        username: 'user',
+        email: 'kek@a.a',
+        createdAt: null
+    }), 'user', err => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('User added');
+        }
+    });
     var usersId = [];
     for (var i = 0; i < peopleCount; i++) {
         usersId.push(mongoose.Types.ObjectId());
