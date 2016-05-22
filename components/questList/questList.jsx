@@ -103,7 +103,7 @@ export default class QuestList extends React.Component {
             <QuestListItemComponent key={quest._id}
                                     id={quest._id}
                                     quest={quest}
-                                    link={quest.photo[0].link}
+                                    link={quest.photo[0] ? quest.photo[0].link : ''}
                                     likes={quest.likes}
                                     date={moment(quest.date).format('MMMM DD, YYYY')}/>
         );

@@ -4,15 +4,32 @@ export default class Comment extends React.Component {
     constructor(params) {
         super(params);
         this.state = {
-            username: params.author,
+            author: params.author,
             text: params.text,
             date: params.date,
             id: params._id,
             newText: "",
             questId: params.questId,
             editMode: false,
-            deleted: false
+            deleted: false,
+            username: ""
         };
+    }
+
+    componentWillMount() {
+        fetch('/users/'+this.props.author, {
+            method: 'get',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            credentials: 'same-origin'
+        }).then(response => {
+            return response.json();
+        }).then(json => {
+            if (json.doc) {
+                this.setState({username: json.doc.username});
+            }
+        });
     }
 
     startEditing() {
@@ -57,6 +74,7 @@ export default class Comment extends React.Component {
     }
 
     render() {
+        console.log(this.state.author);
         if (this.state.deleted) {
             return null;
         }
@@ -66,16 +84,17 @@ export default class Comment extends React.Component {
                 <input className="comment__edit-button" type="button" value="Редактировать" onClick={this.saveComment.bind(this)}/>
             </div> :
             <input className="comment__edit" type="button" value="Редактировать" onClick={this.startEditing.bind(this)}/>;
-        var editArea = this.state.username == this.props.currentUserId ?
+        var editArea = this.state.author == this.props.currentUserId ?
             <div className="comment__edit-area">
                 {editMode}
                 <input className="comment__delete-button" type="button" value="Удалить" onClick={this.deleteComment.bind(this)}/>
             </div> : "";
+        var authorLink = '/users/' + this.state.author + '/profile';
         return (
             <li>
                 <div className="comment-info">
                     <div className="comment-info__author">
-                        {this.state.username}
+                        <a href={authorLink}>{this.state.username}</a>
                     </div>
                     <div className="comment-info__date">
                         {this.state.date}

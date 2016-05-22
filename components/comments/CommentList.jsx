@@ -8,7 +8,8 @@ export default class CommentList extends React.Component {
             comments: params.comments,
             newComment:"",
             questId: params._id,
-            currentUserId: ""
+            currentUserId: "",
+            authorized: false
         };
     }
 
@@ -21,6 +22,9 @@ export default class CommentList extends React.Component {
             body: JSON.stringify({text: this.state.newComment}),
             credentials: 'same-origin'
         }).then(function (response) {
+            if (response.status == 401) {
+                location.assign('/signin');
+            }
             return response.json();
         }).then(json => {
             this.state.comments.push(this.commentObjectToReactComment(json.comment));
@@ -47,7 +51,10 @@ export default class CommentList extends React.Component {
         fetch('/users/getCurrentUser', {
             method: 'get',
             credentials: 'same-origin'
-        }).then(function (response) {
+        }).then(response => {
+            if (response.status !== 401) {
+                this.setState({authorized: true});
+            }
             return response.json();
         }).then(function (json) {
             done(null, json);
@@ -59,7 +66,7 @@ export default class CommentList extends React.Component {
     render() {
         var commentNodes = this.state.comments ? this.state.comments.map(
             (comment) => <Comment {...comment} questId={this.props.id} currentUserId={this.state.currentUserId} key={comment._id} />) : '';
-        return (
+        return this.state.authorized ? (
             <div className="comment-list">
                 <div className="comment-list__header">
                     Комментарии:
@@ -70,6 +77,6 @@ export default class CommentList extends React.Component {
                 <input className="comment-list__text-field" type="text" placeholder="Ваш комментарий" value={this.state.newComment} onChange={this.change.bind(this)}/>
                 <input className="comment-list__add-button" type="button" value="Добавить" onClick={this.addComment.bind(this)}/>
             </div>
-        );
+        ) : null;
     }
 }
