@@ -7,14 +7,14 @@ function getQuest(questId, callback) {
     Quest.findById(questId)
         .populate('author', 'username')
         .exec((err, quest) => {
-        if (err) {
-            return callback(err);
-        }
-        if (!quest) {
-            return callback(new Error('Incorect questId: ' + questId));
-        }
-        callback(null, quest);
-    });
+            if (err) {
+                return callback(err);
+            }
+            if (!quest) {
+                return callback(new Error('Incorect questId: ' + questId));
+            }
+            callback(null, quest);
+        });
 }
 
 function isQuestCompleted(userId, quest) {
