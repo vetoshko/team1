@@ -16,7 +16,8 @@ class UsersController {
     editUser(req, res) {
         var newUserData = new User({
             username: req.body.username,
-            email: req.body.email, phone: req.body.phone
+            email: req.body.email,
+            phone: req.body.phone
         });
         if (req.params.userId != req.user._id) {
             return res.sendStatus(403);
@@ -26,12 +27,20 @@ class UsersController {
         }
         this.usersProvider.editUserById(req.params.userId, newUserData, (err, updatedDoc) => {
             if (err) {
-                return res.status(500).send();
+                return res.sendStatus(500);
             }
             if (!updatedDoc) {
                 return res.sendStatus(400);
             }
-            res.sendStatus(200);
+            var user = req.user;
+            user.email = newUserData.email;
+            user.phone = newUserData.phone;
+            user.username = newUserData.username;
+            req.logIn(user, (err) => {
+                if (!err) {
+                    res.sendStatus(200);
+                }
+            });
         });
 
     }
